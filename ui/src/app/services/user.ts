@@ -1,19 +1,17 @@
 export interface User {
-    id: number;
+    _id: number;
     username: string;
-    password: string;
-    isAdmin: boolean;
     firstName: string;
     lastName: string;
-    height: number;
-    hair: string;
-    eye: string;
+    isadmin: boolean;
     gender: string;
     ethnicity: string;
-    bust: number;
+    height: number;
     waist: number;
     hip: number;
-    inseam: number;
+    chest: number;
+    eyes: string;
     shoe: number;
-    photos: [];
+    hair: string;
+    bio: string;
 }

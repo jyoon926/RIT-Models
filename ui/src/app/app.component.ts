@@ -14,12 +14,12 @@ export class AppComponent {
     constructor(
         private userService: UserService
     ) {
-        this.subscriptions.push(
-            this.userService.test().subscribe({
-                next: (v) => console.log(v),
-                error: (e) => console.log(e)
-            })
-        );
+        // this.subscriptions.push(
+        //     this.userService.register().subscribe({
+        //         next: (v) => console.log(v),
+        //         error: (e) => console.log(e)
+        //     })
+        // );
     }
 
     ngOnDestroy() {
@@ -60,14 +60,14 @@ function lerp(start: number, end: number, amt: number) {
 
 document.addEventListener('mouseover', function(e) {
     let element = e.target as HTMLElement;
-    if (element.tagName.toLowerCase() === "a" && cursor) {
+    if ((element.tagName.toLowerCase() === "a" || element.tagName.toLowerCase() === "button" || element.tagName.toLowerCase() === "input") && cursor) {
         cursor.classList.add("hover");
     }
 });
 
 document.addEventListener('mouseout', function(e) {
     let element = e.target as HTMLElement;
-    if (element.tagName.toLowerCase() === "a" && cursor) {
+    if ((element.tagName.toLowerCase() === "a" || element.tagName.toLowerCase() === "button" || element.tagName.toLowerCase() === "input") && cursor) {
         cursor.classList.remove("hover");
     }
 });

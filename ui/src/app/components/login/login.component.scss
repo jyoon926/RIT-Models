@@ -1,0 +1,41 @@
+@import '../../../styles';
+
+#login {
+    padding: 0 40px;
+    max-width: 400px;
+    box-sizing: content-box;
+    margin: 60px auto 0 auto;
+    height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    em {
+        font-style: normal;
+    }
+    p {
+        margin-bottom: 20px;
+        opacity: .6;
+    }
+    input {
+        width: 100%;
+        margin-top: -10px;
+    }
+    button {
+        width: 100%;
+        text-align: center;
+    }
+    a {
+        text-decoration: underline;
+    }
+    #failed {
+        opacity: 0;
+        font-size: .9rem;
+        color: $light;
+        background: red;
+        padding: 8px 12px;
+        font-style: italic;
+        margin-top: -20px;
+    }
+}

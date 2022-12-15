@@ -12,7 +12,9 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class UserService {
-    private userUrl = environment.serverUrl;
+    private userUrl = environment.serverUrl + '/user/';
+    private loginSuccess!: () => void;
+    private loginFailed!: () => void;
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,31 +25,26 @@ export class UserService {
         private messageService: MessageService
     ) {}
 
-    test(): Observable<any> {
-        return this.http.get(`${this.userUrl}/api`);
+    register(user: User) {
+        return this.http.post<User>(this.userUrl + "/register", user, this.httpOptions).pipe(tap((newUser: User) => {
+            this.log('added user w/ id=' + newUser._id);
+        }), catchError(this.handleError<User>('addUser')));
     }
 
-    getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.userUrl)
-            .pipe(
-                tap(_ => this.log('fetched users')),
-                catchError(this.handleError<User[]>('getUsers', []))
-        );
-    }
-
-    getUser(id: number): Observable<User> {
-        const url = `${this.userUrl}/${id}`;
-        return this.http.get<User>(url).pipe(tap(_ => this.log('fetched user id=' + id)), catchError(this.handleError<User>('getUser id=' + id)));
+    logIn(username: string, password: string) {
+        const body = {"username": username , "password": password};
+        console.log(body);
+        return this.http.put(this.userUrl + '/login', body, this.httpOptions).pipe(tap({
+            next: () => {
+                this.loginSuccess();
+            }, error: e => {
+                this.loginFailed();
+            }
+        }));
     }
 
     updateUser(user: User) {
-        return this.http.put(this.userUrl, user, this.httpOptions).pipe(tap(_ => this.log('updated user id=' + user.id)), catchError(this.handleError<any>('updateUser')));
-    }
-
-    addUser(user: User) {
-        return this.http.post<User>(this.userUrl + "/create", user, this.httpOptions).pipe(tap((newUser: User) => {
-            this.log('added user w/ id=' + newUser.id);
-        }), catchError(this.handleError<User>('addUser')));
+        return this.http.put(this.userUrl, user, this.httpOptions).pipe(tap(_ => this.log('updated user id=' + user._id)), catchError(this.handleError<any>('updateUser')));
     }
 
     deleteUser(id: number): Observable<User> {
@@ -67,6 +64,14 @@ export class UserService {
                this.log(`no users matching "${term}"`)),
             catchError(this.handleError<User[]>('findUsers', []))
         );
+    }
+
+    onLoginSuccess(fn: () => void) {
+        this.loginSuccess = fn;
+    }
+
+    onLoginFailed(fn: () => void) {
+        this.loginFailed = fn;
     }
 
     public log(message: string) {

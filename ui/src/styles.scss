@@ -23,3 +23,35 @@ a {
     font-style: italic;
     font-size: 1.1em;
 }
+h1 {
+    font-size: 8rem;
+}
+h2 {
+    font-size: 4rem;
+}
+h3 {
+    font-size: 2rem;
+}
+input:not([type=checkbox]) {
+    all: unset;
+    font-size: 1rem;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    border: 2px solid rgba($dark, 0.2);
+    transition-duration: .3s;
+    &:focus {
+        border: 2px solid $dark;
+    }
+}
+button {
+    all: unset;
+    background: $dark;
+    color: white;
+    padding: 14px 24px;
+    box-sizing: border-box;
+    transition-duration: .3s;
+    &:hover {
+        opacity: .6;
+        cursor: pointer;
+    }
+}
