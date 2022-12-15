@@ -1,4 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { UserService } from './services/user.service';
+import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -6,6 +9,22 @@ import { Component, HostListener } from '@angular/core';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+    subscriptions: Array<Subscription> = [];
+
+    constructor(
+        private userService: UserService
+    ) {
+        this.subscriptions.push(
+            this.userService.test().subscribe({
+                next: (v) => console.log(v),
+                error: (e) => console.log(e)
+            })
+        );
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    }
 }
 
 let cursor = document.getElementById('cursor');
@@ -30,8 +49,8 @@ function update() {
 setInterval(move, 1000/60);
 
 function move() {
-    cursorX = lerp (cursorX, mouseX, 0.15);
-    cursorY = lerp (cursorY, mouseY, 0.15);
+    cursorX = lerp (cursorX, mouseX, 0.2);
+    cursorY = lerp (cursorY, mouseY, 0.2);
     update();
 }
 

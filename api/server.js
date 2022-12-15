@@ -9,8 +9,12 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('Hello world!');
+app.get('/api', (req, res) => {
+    res.json({msg: 'Hello world!'});
+});
+
+app.get('/api/*', (req, res) => {
+    res.json({msg: 'Hello from somewhere else!'});
 });
 
 app.listen(process.env.HOST_PORT, () => {
