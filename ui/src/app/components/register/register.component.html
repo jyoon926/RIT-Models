@@ -1,1 +1,112 @@
-<p>register works!</p>
+<section id="section-register">
+
+    <h1><em>Become a model</em></h1>
+    <p class="descr">Help photographers discover your beauty. ♥</p>
+
+    <form id="register" autocomplete="off" #registerform="ngForm" (ngSubmit)="register(registerform.value)" [noValidate]="false">
+
+        <div class="row">
+            <div class="basic list">
+                <h3><em>Account Info</em></h3>
+
+                <label for="firstname">First Name</label>
+                <input id="firstname" type="text" name="firstname" required ngModel />
+
+                <label for="lastname">Last Name</label>
+                <input id="lastname" type="text" name="lastname" required ngModel />
+
+                <label for="email">Email</label>
+                <input id="email" type="text" name="email" required ngModel />
+        
+                <label for="password">Password</label>
+                <input id="password" type="password" autocomplete="off" name="password" required ngModel />
+            </div>
+
+            <div class="personal list">
+                <h3><em>Model Info</em></h3>
+
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender" ngModel required>
+                    <option value="Man">Man</option>
+                    <option value="Woman">Woman</option>
+                    <option value="Non-binary/non-conforming">Non-binary/non-conforming</option>
+                    <option value="Other">Other</option>
+                    <option value="N/A">Prefer not to say</option>
+                </select>
+
+                <label for="race">Race/Ethnicity <b>(select multiple with the ctrl or cmd key)</b></label>
+                <select name="race" id="race" ngModel="N/A" multiple required>
+                    <option value="Black or African American">Black or African American</option>
+                    <option value="Asian">Asian</option>
+                    <option value="Hispanic or Latino">Hispanic or Latino</option>
+                    <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+                    <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+                    <option value="White">White</option>
+                    <option value="Other">Other</option>
+                    <option value="N/A">Prefer not to say</option>
+                </select>
+
+                <div class="small">
+                    <label for="height">Height <b>(in)</b></label>
+                    <input id="height" type="number" required name="height" ngModel (keydown)="keydown($event)" />
+                </div>
+                <div class="small">
+                    <label for="waist">Waist <b>(in)</b></label>
+                    <input id="waist" type="number" name="waist" ngModel required (keydown)="keydown($event)" />
+                </div>
+                <div class="small">
+                    <label for="hip">Hip <b>(in)</b></label>
+                    <input id="hip" type="number" name="hip" ngModel required (keydown)="keydown($event)" />
+                </div>
+                <div class="small">
+                    <label for="chest">Chest <b>(in)</b></label>
+                    <input id="chest" type="number" name="chest" ngModel required (keydown)="keydown($event)" />
+                </div>
+                <div class="small">
+                    <label for="eyes">Eyes</label>
+                    <select name="eyes" id="eyes" ngModel="N/A" required>
+                        <option value="Brown">Brown</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Hazel">Hazel</option>
+                        <option value="Green">Green</option>
+                        <option value="Gray">Gray</option>
+                        <option value="Black">Black</option>
+                        <option value="Red">Red</option>
+                        <option value="Amber">Amber</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="small">
+                    <label for="shoe">Shoe</label>
+                    <input id="shoe" type="number" min="0" step="0.5" name="shoe" ngModel (keydown)="keydown($event)" />
+                </div>
+                <div class="small">
+                <label for="hair">Hair</label>
+                    <select name="hair" id="hair" ngModel="N/A" required>
+                        <option value="Black">Black</option>
+                        <option value="Brown">Brown</option>
+                        <option value="Blonde">Blonde</option>
+                        <option value="Red">Red</option>
+                        <option value="Gray">Gray</option>
+                        <option value="White">White</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Purple">Purple</option>
+                        <option value="Pink">Pink</option>
+                        <option value="Green">Green</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="bio">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" rows="6" maxlength="200" type="text" name="bio" placeholder="Write a short bio about yourself. Is there anything you want your photographer to know about? Feel free to also put your social media accounts here." ngModel></textarea>
+                </div>
+
+                <button type='submit'>Register</button>
+            </div>
+        </div>
+
+        <!-- <p>Already have an account? <a routerLink="/login">Log in</a></p> -->
+        <!-- <p id="failed">Something went wrong</p> -->
+
+    </form>
+</section>

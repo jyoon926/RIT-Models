@@ -1,11 +1,12 @@
 export interface User {
     _id: number;
-    username: string;
-    firstName: string;
-    lastName: string;
+    email: string;
+    password: string;
+    firstname: string;
+    lastname: string;
     isadmin: boolean;
     gender: string;
-    ethnicity: string;
+    race: string;
     height: number;
     waist: number;
     hip: number;

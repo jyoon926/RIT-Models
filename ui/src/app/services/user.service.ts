@@ -26,16 +26,18 @@ export class UserService {
     ) {}
 
     register(user: User) {
+        user.isadmin = false;        
         return this.http.post<User>(this.userUrl + "/register", user, this.httpOptions).pipe(tap((newUser: User) => {
             this.log('added user w/ id=' + newUser._id);
         }), catchError(this.handleError<User>('addUser')));
     }
 
-    logIn(username: string, password: string) {
-        const body = {"username": username , "password": password};
+    logIn(email: string, password: string) {
+        const body = {"email": email , "password": password};
         console.log(body);
-        return this.http.put(this.userUrl + '/login', body, this.httpOptions).pipe(tap({
-            next: () => {
+        return this.http.put<User>(this.userUrl + '/login', body, this.httpOptions).pipe(tap({
+            next: (user: User) => {
+                console.log(user);
                 this.loginSuccess();
             }, error: e => {
                 this.loginFailed();
@@ -63,6 +65,12 @@ export class UserService {
                this.log(`found users matching "${term}"`) :
                this.log(`no users matching "${term}"`)),
             catchError(this.handleError<User[]>('findUsers', []))
+        );
+    }
+
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(`${this.userUrl}/users`).pipe(
+            catchError(this.handleError<User[]>('users', []))
         );
     }
 

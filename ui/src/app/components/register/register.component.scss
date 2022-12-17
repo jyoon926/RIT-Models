@@ -1,0 +1,145 @@
+@import '../../../styles';
+
+#section-register {
+    padding: 200px 40px;
+    h1 {
+        font-size: 6rem;
+        font-family: big-caslon-fb, serif;
+        margin-bottom: 40px;
+        border-bottom: 1px solid rgba($dark, 0.3);
+        font-weight: normal;
+    }
+    em {
+        font-style: normal;
+    }
+    .descr {
+        margin-bottom: 40px;
+        opacity: .6;
+    }
+    #register {
+        label {
+            width: fit-content;
+        }
+        .row {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            gap: 40px;
+            .basic {
+                max-width: 300px;
+            }
+            .list {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                label b {
+                    font-weight: normal;
+                    opacity: .6;
+                    font-style: italic;
+                    font-size: .9rem;
+                }
+                p, label {
+                    margin-bottom: -10px;
+                }
+                select {
+                    font-size: 1rem;
+                    padding: 8px 10px;
+                    box-sizing: border-box;
+                    border: 2px solid rgba($dark, 0.2);
+                    max-width: 400px;
+                }
+                .checklist {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 6px;
+                    input {
+                        margin-right: 6px;
+                    }
+                    label {
+                        padding: 6px 10px;
+                        border: 2px solid rgba($dark, 0.2);
+                    }
+                }
+                input[type=number] {
+                    max-width: 100px;
+                }
+                input[type=text] {
+                    max-width: 400px;
+                }
+                textarea {
+                    max-width: 400px;
+                    padding: 8px 10px;
+                    border: 2px solid rgba($dark, 0.2);
+                    line-height: 1.5;
+                    resize: none;
+                    font-size: 1rem;
+                }
+            }
+        }
+        .flow {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .small {
+            label {
+                margin-right: 10px;
+            }
+        }
+        .bio {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 640px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $dark;
+            background: none;
+            color: $dark;
+            &::before, &::after {
+                width: calc(100% - 80px);
+                max-width: 300px;
+                padding: 14px 24px;
+                box-sizing: border-box;
+                content: "Register";
+                position: absolute;
+                color: rgba($dark, 0);
+                border: 2px solid rgba($dark, 1);
+                transition-duration: .4s;
+                z-index: -1;
+            }
+            &:hover {
+                opacity: 1;
+                &::before {
+                    transform: translate(4px, -4px);
+                }
+                &::after {
+                    transform: translate(-4px, 4px);
+                }
+            }
+        }
+        a {
+            text-decoration: underline;
+        }
+        #failed {
+            opacity: 0;
+            font-size: .9rem;
+            color: $light;
+            background: red;
+            padding: 8px 12px;
+            font-style: italic;
+            margin-top: -20px;
+        }
+    }
+}

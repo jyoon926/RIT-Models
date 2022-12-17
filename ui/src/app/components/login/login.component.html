@@ -1,11 +1,11 @@
 <form id="login" autocomplete="off">
     <h2><em>Log in</em></h2>
     <p>Log in to manage your model profile.</p>
-    <label for="username">Username</label>
-    <input id="username" type="text" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" #username />
+    <label for="email">Email</label>
+    <input id="email" type="text" #email required />
     <label for="password">Password</label>
-    <input id="password" type="password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" #password />
-    <button type='button' (click)="logIn(username.value, password.value);">Log in</button>
+    <input id="password" type="password" #password required />
+    <button type='button' (click)="logIn(email.value, password.value);">Log in</button>
     <p>Don't have an account? <a routerLink="/register">Sign up</a></p>
     <p id="failed">Login failed</p>
 </form>

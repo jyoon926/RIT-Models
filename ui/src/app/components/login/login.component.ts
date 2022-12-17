@@ -13,16 +13,15 @@ export class LoginComponent {
     ngOnInit(): void {
         this.userService.onLoginSuccess(this.loginSuccess.bind(this));
         this.userService.onLoginFailed(this.loginFailed.bind(this));
-      }
-    
+    }
 
-    logIn(username: string, password: string): void {
-        username = username.trim();
-        if (!username || !password) {
+    logIn(email: string, password: string): void {
+        email = email.trim();
+        if (!email || !password) {
             this.loginFailed();
             return;
         } else {
-            this.userService.logIn(username, password).subscribe();
+            this.userService.logIn(email, password).subscribe();
         }
     }
 

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { User } from 'src/app/services/user';
+
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-models',
@@ -6,6 +9,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./models.component.scss']
 })
 export class ModelsComponent {
+    users: User[] = [];
+    
+    constructor(private userService: UserService) {}
+
+    ngOnInit(): void {
+        this.getUsers();
+    }
+
+    getUsers(): void {
+        this.userService.getUsers().subscribe(users => {
+            this.users = users;
+            console.log(this.users);
+            
+        });
+    }
+
     array(n: number) {
         return Array(n);
     }

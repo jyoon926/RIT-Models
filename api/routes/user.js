@@ -2,43 +2,51 @@ const express = require('express');
 const router = express.Router();
 const _ = require('underscore');
 const User = require('../models/User');
+const db = require('../config/db');
 
 // Inserting User CREATE
 router.post('/register', async (req, res, next) => {
     const user = new User(req.body);
-    // user.save().then(
-    //     (result) => {
-    //         res.json(result);
-    //     }
-    // ).catch((error) => next(error));
     try {
         const savedUser = await user.save();
-        console.log("Registered " + savedUser.username);
+        console.log("Registered " + savedUser.email);
         res.json(savedUser);
     } catch(error) {
         next(error);
     }
 });
 
+// Get all users READ
+router.get('/users', async (req, res) => {
+    User.find({}, function(err, users) {
+        var userList = [];
+        users.forEach(function(user) {
+            user.password = "";
+            userList.push(user);
+        });
+        res.send(userList);
+    });
+});
+
 // Login
 router.put('/login', (req, res, next) => {
-    // Username and password are required for logging in
-    if (!req.body.username || !req.body.password) {
-        next(new Error(`Username or password is missing in body request: 
+    // Email and password are required for logging in
+    if (!req.body.email || !req.body.password) {
+        next(new Error(`Email or password is missing in body request: 
                         ${JSON.stringify(req.body)}`));
         return;
     }
 
-    User.findOne({username: req.body.username, password: req.body.password})
+    User.findOne({email: req.body.email, password: req.body.password})
     .then(
         (result) => {
             if (result) {
                 res.json(_.pick(
-                    result, '_id', 'username', 'firstname', 'lastname', 'email', 
-                    'isadmin', 'gender', 'ethnicity', 'height', 'waist', 
+                    result, '_id', 'email', 'firstname', 'lastname', 
+                    'isadmin', 'gender', 'race', 'height', 'waist', 
                     'hip', 'chest', 'eyes', 'shoe', 'hair', 'bio'
                 ));
-                console.log("Logged in to " + result.username);
+                console.log("Logged in to " + result.email);
             } else {
                 res.sendStatus(401);
             }

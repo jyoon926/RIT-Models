@@ -56,10 +56,14 @@
     </ul>
     <div class="gallery">
         <ul>
-            <a *ngFor="let n of array(20)">
+            <a *ngFor="let user of users">
+                <div class="image"></div>
+                <p class="name">{{user.firstname}} {{user.lastname.charAt(0)}}.</p>
+            </a>
+            <!-- <a *ngFor="let n of array(20)">
                 <div class="image"></div>
                 <p class="name">First L.</p>
-            </a>
+            </a> -->
         </ul>
     </div>
 </section>

@@ -2,10 +2,6 @@
 
 section {
     padding: 200px 40px;
-    // background: url('../../../assets/images/gradient1.jpg');
-    // background-size: cover;
-    // background-position: top;
-    // background-attachment: fixed;
 }
 h1 {
     font-size: 6rem;
@@ -119,7 +115,7 @@ h3 {
             }
             .name {
                 padding: 14px 0 0 0;
-                text-transform: uppercase;
+                text-transform: capitalize;
             }
         }
     }

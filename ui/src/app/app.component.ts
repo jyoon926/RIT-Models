@@ -60,14 +60,18 @@ function lerp(start: number, end: number, amt: number) {
 
 document.addEventListener('mouseover', function(e) {
     let element = e.target as HTMLElement;
-    if ((element.tagName.toLowerCase() === "a" || element.tagName.toLowerCase() === "button" || element.tagName.toLowerCase() === "input") && cursor) {
+    if (hoverElement(element) && cursor) {
         cursor.classList.add("hover");
     }
 });
 
 document.addEventListener('mouseout', function(e) {
     let element = e.target as HTMLElement;
-    if ((element.tagName.toLowerCase() === "a" || element.tagName.toLowerCase() === "button" || element.tagName.toLowerCase() === "input") && cursor) {
+    if (hoverElement(element) && cursor) {
         cursor.classList.remove("hover");
     }
 });
+
+function hoverElement(e: HTMLElement) {
+    return (e.tagName.toLowerCase() === "a" || e.tagName.toLowerCase() === "button" || e.tagName.toLowerCase() === "input" || e.tagName.toLowerCase() === "label");
+}

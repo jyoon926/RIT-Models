@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Scheme = mongoose.Schema;
 
 const UserSchema = new Scheme({
-    username: {
+    email: {
         type: String,
         required: true,
         unique: true
@@ -19,11 +19,6 @@ const UserSchema = new Scheme({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
     isadmin: {
         type: Boolean,
         default: false
@@ -33,10 +28,10 @@ const UserSchema = new Scheme({
         enum: ['Man', 'Woman', 'Non-binary/non-conforming', 'Other', 'N/A'],
         default: 'N/A'
     },
-    ethnicity: {
+    race: {
         type: [String],
-        enum: ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other'],
-        default: ['Other']
+        enum: ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other', 'N/A'],
+        default: ['N/A']
     },
     height: {
         type: Number,
@@ -56,8 +51,8 @@ const UserSchema = new Scheme({
     },
     eyes: {
         type: String,
-        enum: ['Brown', 'Blue', 'Hazel', 'Green', 'Gray', 'Black', 'Red', 'Amber', 'Other'],
-        default: 'Other'
+        enum: ['Brown', 'Blue', 'Hazel', 'Green', 'Gray', 'Black', 'Red', 'Amber', 'Other', 'N/A'],
+        default: 'N/A'
     },
     shoe: {
         type: Number,
@@ -65,7 +60,7 @@ const UserSchema = new Scheme({
     },
     hair: {
         type: String,
-        default: ""
+        default: 'N/A'
     },
     bio: {
         type: String,
