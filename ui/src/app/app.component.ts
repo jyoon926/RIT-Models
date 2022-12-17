@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { UserService } from './services/user.service';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { AuthService } from './services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -12,14 +13,9 @@ export class AppComponent {
     subscriptions: Array<Subscription> = [];
 
     constructor(
-        private userService: UserService
+        private userService: UserService,
+        public authService: AuthService
     ) {
-        // this.subscriptions.push(
-        //     this.userService.register().subscribe({
-        //         next: (v) => console.log(v),
-        //         error: (e) => console.log(e)
-        //     })
-        // );
     }
 
     ngOnDestroy() {

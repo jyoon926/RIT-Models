@@ -12,8 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
     private userUrl = environment.serverUrl + '/user/';
-    private loginSuccess!: () => void;
-    private loginFailed!: () => void;
+    private loggedInUser: any;
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,15 +31,7 @@ export class UserService {
 
     logIn(email: string, password: string) {
         const body = {"email": email , "password": password};
-        console.log(body);
-        return this.http.put<User>(this.userUrl + '/login', body, this.httpOptions).pipe(tap({
-            next: (user: User) => {
-                console.log(user);
-                this.loginSuccess();
-            }, error: e => {
-                this.loginFailed();
-            }
-        }));
+        return this.http.post(this.userUrl + '/login', body, this.httpOptions);
     }
 
     updateUser(user: User) {
@@ -74,17 +65,19 @@ export class UserService {
 
     getUser(name: string): Observable<User> {
         return this.http.get<User>(`${this.userUrl}/${name}`).pipe(
-            tap(_ => console.log('fetched product id=${id}')),
-            catchError(this.handleError<User>('getProduct id=${id}'))
+            tap(
+                // _ => console.log(`fetched user ${name}`)
+            ),
+            catchError(this.handleError<User>(`getUser ${name}`))
         );
     }
-
-    onLoginSuccess(fn: () => void) {
-        this.loginSuccess = fn;
+    
+    setLoggedInUser(user: any) {
+        this.loggedInUser = user;
     }
-
-    onLoginFailed(fn: () => void) {
-        this.loginFailed = fn;
+  
+    getLoggedInUser(): string {
+        return this.loggedInUser;
     }
 
     /**
@@ -96,8 +89,8 @@ export class UserService {
      */
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
-        console.error(error);
-        return of(result as T);
+            console.error(error);
+            return of(result as T);
         };
     }
 }

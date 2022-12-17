@@ -1,11 +1,5 @@
 <section>
     <h1>Model Profile</h1>
-    <div *ngIf="user != null">
-        <p style="text-transform: capitalize;">{{user.firstname}} {{user.lastname}}</p>
-        <p>{{user.email}}</p>
-        <p>{{user.gender}}</p>
-    </div>
-    <div *ngIf="user == null">
-        <p>Model does not exist</p>
-    </div>
+    <p *ngIf="user">{{user.firstname}}</p>
+    <button (click)="logOut()">Log out</button>
 </section>

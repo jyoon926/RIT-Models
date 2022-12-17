@@ -47,7 +47,7 @@ header {
                 }
             }
         }
-        .sign-up {
+        .sign-up, .profile {
             padding: 14px 28px;
             border: 1px solid rgba($dark, 1);
             transition-duration: .4s;
@@ -76,6 +76,9 @@ header {
                     border: 1px solid rgba($dark, 1);
                 }
             }
+        }
+        .profile::before, .profile::after {
+            content: "Your profile";
         }
     }
 }

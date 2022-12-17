@@ -44,7 +44,7 @@
                 }
                 select {
                     font-size: 1rem;
-                    padding: 4px 8px;
+                    padding: 4px 6px;
                     box-sizing: border-box;
                     border: 1px solid rgba($dark, 0.2);
                     max-width: 400px;
@@ -58,7 +58,7 @@
                         margin-right: 6px;
                     }
                     label {
-                        padding: 4px 8px;
+                        padding: 4px 6px;
                         border: 1px solid rgba($dark, 0.2);
                     }
                 }
@@ -70,7 +70,7 @@
                 }
                 textarea {
                     max-width: 400px;
-                    padding: 4px 8px;
+                    padding: 4px 6px;
                     border: 1px solid rgba($dark, 0.2);
                     line-height: 1.5;
                     resize: none;

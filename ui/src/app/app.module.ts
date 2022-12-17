@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ModelsComponent } from './components/models/models.component';
 import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { FormsModule } from '@angular/forms';
+import { ModelComponent } from './components/model/model.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     AboutComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    ModelComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

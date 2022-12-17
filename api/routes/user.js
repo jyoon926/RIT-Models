@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const _ = require('underscore');
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const db = require('../config/db');
 
@@ -41,24 +42,19 @@ router.get('/:name', async (req, res) => {
 });
 
 // Login
-router.put('/login', (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     // Email and password are required for logging in
     if (!req.body.email || !req.body.password) {
-        next(new Error(`Email or password is missing in body request: 
-                        ${JSON.stringify(req.body)}`));
+        next(new Error(`Email or password is missing in body request: ${JSON.stringify(req.body)}`));
         return;
     }
-
     User.findOne({email: req.body.email, password: req.body.password})
     .then(
         (result) => {
             if (result) {
-                res.json(_.pick(
-                    result, '_id', 'email', 'firstname', 'lastname', 
-                    'isadmin', 'gender', 'race', 'height', 'waist', 
-                    'hip', 'chest', 'eyes', 'shoe', 'hair', 'bio'
-                ));
-                console.log("Logged in to " + result.email);
+                const token = jwt.sign({ id: result._id }, 'secretkey');
+                res.json({"token": token, "name": result.fullname});
+                console.log("Logged in to " + result.fullname);
             } else {
                 res.sendStatus(401);
             }

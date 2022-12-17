@@ -3,9 +3,9 @@
     <ul>
         <a href="/models">Models</a>
         <a href="/about">About</a>
-        <!-- <a href="/">Contact</a> -->
-        <a href="/login">Login</a>
-        <a href="/register" class="sign-up">Become a model</a>
+        <a href="/login" *ngIf="!(authService.isLoggedIn$ | async)">Login</a>
+        <a href="/profile" class="profile" *ngIf="(authService.isLoggedIn$ | async)">Your profile</a>
+        <a href="/register" class="sign-up" *ngIf="!(authService.isLoggedIn$ | async)">Become a model</a>
     </ul>
 </header>
 <div id="cursor"><div class="inner"></div></div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/services/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,11 +10,7 @@ import { User } from 'src/app/services/user';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-    constructor(private userService: UserService, private router: Router) { }
-  
-    ngOnInit(): void {
-        this.userService.onLoginSuccess(this.loginSuccess.bind(this));
-    }
+    constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
     register(form: any): void {
         if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(form.email))
@@ -36,15 +33,11 @@ export class RegisterComponent {
             "bio": form.bio.trim()
         };
         this.userService.register(user as unknown as User).subscribe();
-        this.userService.logIn(user.email, user.password).subscribe();
+        this.authService.logIn(user.email, user.password).subscribe();
     }
 
     logIn(email: string, password: string): void {
-        this.userService.logIn(email, password).subscribe();
-    }
-
-    loginSuccess() {
-        // this.router.navigate(['profile']);
+        this.authService.logIn(email, password).subscribe();
     }
 
     keydown(event: any) {
