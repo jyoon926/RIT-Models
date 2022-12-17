@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/services/user';
 
 import { UserService } from 'src/app/services/user.service';
@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './models.component.html',
   styleUrls: ['./models.component.scss']
 })
-export class ModelsComponent {
+export class ModelsComponent implements OnInit {
     users: User[] = [];
     
     constructor(private userService: UserService) {}
@@ -20,8 +20,7 @@ export class ModelsComponent {
     getUsers(): void {
         this.userService.getUsers().subscribe(users => {
             this.users = users;
-            console.log(this.users);
-            
+            // console.log(this.users);
         });
     }
 

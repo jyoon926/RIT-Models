@@ -4,7 +4,7 @@ header {
     z-index: 10;
     position: fixed;
     top: 0; left: 0;
-    height: 70px;
+    height: 60px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -40,18 +40,16 @@ header {
         a {
             padding: 3px;
             &:not(.sign-up) {
-                border-bottom: 2px solid rgba($dark, 0);
+                border-bottom: 1px solid rgba($dark, 0);
                 transition-duration: .4s;
                 &:hover {
-                    border-bottom: 2px solid $dark;
+                    border-bottom: 1px solid $dark;
                 }
             }
         }
         .sign-up {
-            padding: 12px 20px;
-            background: none;
-            color: $dark;
-            border: 2px solid $dark;
+            padding: 14px 28px;
+            border: 1px solid rgba($dark, 1);
             transition-duration: .4s;
             display: flex;
             flex-direction: column;
@@ -59,23 +57,23 @@ header {
             align-items: center;
             line-height: 0.8;
             &::before, &::after {
-                padding: 12px 20px;
+                padding: 14px 28px;
                 content: "Become a model";
                 position: absolute;
                 color: rgba($dark, 0);
-                border: 2px solid rgba($dark, 1);
+                border: 1px solid rgba($dark, 0);
                 transition-duration: .4s;
                 z-index: -1;
             }
             &:hover {
-                // background: $dark;
-                // color: $bg;
-                // border: 2px solid rgba($dark, 0);
+                border: 1px solid rgba($dark, 1);
                 &::before {
                     transform: translate(4px, -4px);
+                    border: 1px solid rgba($dark, 1);
                 }
                 &::after {
                     transform: translate(-4px, 4px);
+                    border: 1px solid rgba($dark, 1);
                 }
             }
         }

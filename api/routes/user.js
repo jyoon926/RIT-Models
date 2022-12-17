@@ -28,6 +28,18 @@ router.get('/users', async (req, res) => {
     });
 });
 
+// Get user from fullname READ
+router.get('/:name', async (req, res) => {
+    User.find({}, function(err, users) {
+        var userList = [];
+        users.forEach(function(user) {
+            if (user.fullname == req.params.name) {
+                res.json(user);
+            }
+        });
+    });
+});
+
 // Login
 router.put('/login', (req, res, next) => {
     // Email and password are required for logging in

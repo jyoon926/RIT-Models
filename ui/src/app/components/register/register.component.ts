@@ -16,13 +16,14 @@ export class RegisterComponent {
     }
 
     register(form: any): void {
-        if (form.email.test(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/))
+        if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(form.email))
             return;
         let user = {
-            "email": form.email,
+            "email": form.email.trim(),
             "password": form.password,
-            "firstname": form.firstname,
-            "lastname": form.lastname,
+            "firstname": form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
+            "lastname": form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
+            "fullname": form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
             "gender": form.gender,
             "race": form.race,
             "height": form.height as number,
@@ -32,7 +33,7 @@ export class RegisterComponent {
             "eyes": form.eyes,
             "shoe": form.shoe,
             "hair": form.hair,
-            "bio": form.bio
+            "bio": form.bio.trim()
         };
         this.userService.register(user as unknown as User).subscribe();
         this.userService.logIn(user.email, user.password).subscribe();
@@ -43,7 +44,7 @@ export class RegisterComponent {
     }
 
     loginSuccess() {
-        this.router.navigate(['profile']);
+        // this.router.navigate(['profile']);
     }
 
     keydown(event: any) {

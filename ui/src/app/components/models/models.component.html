@@ -1,6 +1,6 @@
 <section>
     <h1>Models</h1>
-    <h3>FILTERS</h3>
+    <!-- <h3>FILTERS</h3>
     <ul class="filters">
         <div id="gender" class="select">
             <a class="select-button select-child" (click)="dropdown($event.target)">Gender<a></a></a>
@@ -53,12 +53,12 @@
                 <a id="all-eyes" class="option">All</a>
             </div>
         </div>
-    </ul>
+    </ul> -->
     <div class="gallery">
         <ul>
-            <a *ngFor="let user of users">
+            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}">
                 <div class="image"></div>
-                <p class="name">{{user.firstname}} {{user.lastname.charAt(0)}}.</p>
+                <p class="name"><em>{{user.firstname}} {{user.lastname.charAt(0)}}.</em></p>
             </a>
             <!-- <a *ngFor="let n of array(20)">
                 <div class="image"></div>

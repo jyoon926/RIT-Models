@@ -10,7 +10,7 @@ $light: #ffffff;
     line-height: 1;
 }
 html {
-    font-size: 16px;
+    font-size: 14px;
     scroll-behavior: smooth;
     background: $light;
 }
@@ -35,19 +35,19 @@ h3 {
 input:not([type=checkbox]) {
     all: unset;
     font-size: 1rem;
-    padding: 8px 10px;
+    padding: 4px 8px;
     box-sizing: border-box;
-    border: 2px solid rgba($dark, 0.2);
+    border: 1px solid rgba($dark, 0.2);
     transition-duration: .3s;
     &:focus {
-        border: 2px solid $dark;
+        border: 1px solid $dark;
     }
 }
 button {
     all: unset;
     background: $dark;
     color: white;
-    padding: 14px 24px;
+    padding: 12px 24px;
     box-sizing: border-box;
     transition-duration: .3s;
     &:hover {

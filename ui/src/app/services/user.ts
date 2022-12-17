@@ -4,6 +4,7 @@ export interface User {
     password: string;
     firstname: string;
     lastname: string;
+    fullname: string;
     isadmin: boolean;
     gender: string;
     race: string;

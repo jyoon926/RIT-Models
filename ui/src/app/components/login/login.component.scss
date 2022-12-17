@@ -1,11 +1,20 @@
 @import '../../../styles';
 
+section {
+    margin-top: 60px;
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 #login {
     padding: 0 40px;
     max-width: 400px;
     box-sizing: content-box;
-    margin: 60px auto 0 auto;
-    height: calc(100vh - 70px);
+    margin: 0 auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +32,7 @@
     }
     input {
         width: 100%;
-        margin-top: -10px;
+        margin-top: -14px;
     }
     button {
         width: 100%;
@@ -37,8 +46,41 @@
         font-size: .9rem;
         color: $light;
         background: red;
-        padding: 8px 12px;
+        padding: 4px 8px;
         font-style: italic;
         margin-top: -20px;
+    }
+}
+.logocontainer {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba($dark, 1);
+    // img {
+    //     width: 50%;
+    //     filter: invert(1)
+    // }
+    .circle {
+        position: absolute;
+        width: 18vw;
+        height: 18vw;
+        background: $light;
+        border-radius: 100vw;
+        animation: bob 5s ease infinite;
+    }
+    .box {
+        position: absolute;
+        width: 30vw;
+        height: 20vw;
+        backdrop-filter: blur(2vw) brightness(0.6);
+        margin-top: 20vw;
+        // box-shadow: 0 0 3vw -1vw rgba($dark, 1);
+    }
+    @keyframes bob {
+        0% { transform: translateY(-2vw); }
+        50% { transform: translateY(2vw); }
+        100% { transform: translateY(-2vw); }
     }
 }

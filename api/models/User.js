@@ -19,6 +19,11 @@ const UserSchema = new Scheme({
         type: String,
         required: true
     },
+    fullname: {
+        type: String,
+        required: true,
+        unique: true
+    },
     isadmin: {
         type: Boolean,
         default: false
