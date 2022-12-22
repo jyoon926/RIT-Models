@@ -11,13 +11,13 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//     res.json({msg: 'Hello world!'});
-// });
+app.get('/', (req, res) => {
+    res.json({msg: 'Hello world!'});
+});
 
-// app.get('/api', (req, res) => {
-//     res.json({msg: 'Hello from the api!'});
-// });
+app.get('/api', (req, res) => {
+    res.json({msg: 'Hello from the api!'});
+});
 
 // Adding other routes
 app.use('/api/user', require('./routes/user'));
