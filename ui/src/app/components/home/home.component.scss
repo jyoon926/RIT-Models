@@ -1,6 +1,4 @@
-:root {
-    --carousel: 1000px;
-}
+@import '../../../styles';
         
 #hero {
     height: 100vh;
@@ -19,17 +17,43 @@
         left: 40px;
         width: calc(100% - 80px);
         overflow-x: hidden;
-        ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        .track {
+            width: fit-content;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             align-items: flex-start;
             gap: 12px;
-            animation: carousel 10s infinite;
+            // animation: carousel 12s infinite ease-in-out;
             a {
-                height: 200px;
+                width: 7vw;
                 aspect-ratio: 0.75;
-                background: #eee;
+                background-size: cover;
+                background-position: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition-duration: .4s;
+                mix-blend-mode: multiply;
+                &:hover {
+                    opacity: .6;
+                }
+            }
+            .all {
+                border: 1px solid rgba($dark, 0.3);
+                color: rgba($dark, 0.6);
+                background: rgba($dark, 0);
+                text-align: center;
+                padding: 20px;
+                &:hover {
+                    opacity: 1;
+                    background: rgba($dark, 0.1);
+                    border: 1px solid rgba($dark, 0);
+                }
             }
         }
         @keyframes carousel {
@@ -37,7 +61,7 @@
                 transform: translateX(0%);
             }
             50% {
-                transform: translateX(var(--carousel));
+                transform: translateX(calc(-100% + (100vw - 80px)));
             }
             100% {
                 transform: translateX(0%);
@@ -54,6 +78,23 @@
         font-size: 1.5rem;
         max-width: 400px;
         padding-top: 40px;
+        line-height: 1.25;
+    }
+    .viewall {
+        margin-top: 20px;
+        margin-right: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $dark;
+        padding: 12px 24px;
+        transform: translateX(100%);
+        transition-duration: .4s;
+        &:hover {
+            background: $dark;
+            color: $light;
+        }
     }
 }
 section {

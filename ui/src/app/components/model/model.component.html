@@ -1,11 +1,36 @@
-<section>
-    <h1>Model Profile</h1>
-    <div *ngIf="user != null">
-        <p style="text-transform: capitalize;">{{user.firstname}} {{user.lastname}}</p>
-        <p>{{user.email}}</p>
-        <p>{{user.gender}}</p>
+<section *ngIf="user != null">
+    <h1>{{user.firstname}} {{user.lastname}}</h1>
+    <div class="row">
+        <div class="image"id="image" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}"></div>
+        <div class="col">
+            <div class="track">
+                <a class="thumbnail" *ngFor="let image of images | keyvalue" [ngStyle]="{'background-image':' url(' + getImage(image.key) + ')'}" (click)="selectImage(image.key)"></a>
+            </div>
+            <div class="info">
+                <!-- <p class="name"><em>{{user.firstname}}</em></p> -->
+                <div class="inner"><p class="category">Gender</p><p>{{user.gender}}</p></div>
+                <div class="inner"><p class="category">Race</p><p>{{user.race}}</p></div>
+                <div class="inner"><p class="category">Height</p><p>{{parseInt(user.height / 12)}}' {{user.height % 12}}"</p></div>
+                <div class="inner"><p class="category">Waist</p><p>{{user.waist}}"</p></div>
+                <div class="inner"><p class="category">Hip</p><p>{{user.hip}}"</p></div>
+                <div class="inner"><p class="category">Chest</p><p>{{user.chest}}"</p></div>
+                <div class="inner"><p class="category">Shoe</p><p>{{user.shoe}}</p></div>
+                <div class="inner"><p class="category">Eyes</p><p>{{user.eyes}}</p></div>
+                <div class="inner"><p class="category">Hair</p><p>{{user.hair}}</p></div>
+            </div>
+            <p class="bio" *ngIf="user.bio.length > 0">{{user.bio}}</p>
+            <div class="links">
+                <a href='mailto:{{user.email}}'>Email</a>
+                <a *ngIf="user.instagram" href='https://www.instagram.com/{{user.instagram}}/' target="_blank">Instagram</a>
+                <button routerLink='/profile' *ngIf="authService.getLoggedInUser() == user.fullname">
+                    Edit profile
+                </button>
+            </div>
+            <button (click)="back()" class="back">Back</button>
+        </div>
     </div>
-    <div *ngIf="user == null">
-        <p>Model does not exist</p>
-    </div>
+</section>
+<section *ngIf="user == null">
+    <h1>This model does not exist.</h1>
+    <button routerLink='/models'>View all models</button>
 </section>

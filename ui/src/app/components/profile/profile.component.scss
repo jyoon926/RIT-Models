@@ -10,3 +10,138 @@ h1 {
     border-bottom: 1px solid rgba($dark, 0.3);
     font-weight: normal;
 }
+form {
+    em {
+        font-style: normal;
+    }
+    label {
+        width: fit-content;
+    }
+    .row {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        gap: 40px;
+        .basic {
+            max-width: 300px;
+        }
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            label b {
+                font-weight: normal;
+                opacity: .6;
+                font-style: italic;
+                font-size: .9rem;
+            }
+            p, label {
+                margin-bottom: -14px;
+            }
+            select {
+                max-width: 400px;
+            }
+            .checklist {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 6px;
+                input {
+                    margin-right: 6px;
+                }
+                label {
+                    padding: 4px 6px;
+                    border: 1px solid rgba($dark, 0.3);
+                }
+            }
+            input[type=number] {
+                max-width: 100px;
+            }
+            input[type=text] {
+                max-width: 400px;
+            }
+            textarea {
+                max-width: 400px;
+            }
+            img {
+                width: 150px;
+                margin-bottom: -14px;
+            }
+        }
+    }
+    .flow {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+    .small {
+        label {
+            margin-right: 10px;
+        }
+    }
+    .bio {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 640px;
+    }
+    .ig {
+        .at {
+            position: absolute;
+            margin: 7px 0 0 7px;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        input {
+            padding-left: 20px;
+        }
+    }
+    #save {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $dark;
+        background: none;
+        color: $dark;
+        &::before, &::after {
+            width: calc(100% - 80px);
+            max-width: 300px;
+            padding: 12px 24px;
+            box-sizing: border-box;
+            content: "Register";
+            position: absolute;
+            color: rgba($dark, 0);
+            border: 1px solid rgba($dark, 1);
+            transition-duration: .4s;
+            z-index: -1;
+        }
+        &:hover {
+            opacity: 1;
+            &::before {
+                transform: translate(4px, -4px);
+            }
+            &::after {
+                transform: translate(-4px, 4px);
+            }
+        }
+    }
+    a {
+        text-decoration: underline;
+    }
+    #failed {
+        opacity: 0;
+        font-size: .9rem;
+        color: $light;
+        background: red;
+        padding: 8px 12px;
+        font-style: italic;
+        margin-top: -20px;
+    }
+}

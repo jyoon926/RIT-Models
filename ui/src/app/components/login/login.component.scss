@@ -74,8 +74,9 @@ section {
         position: absolute;
         width: 30vw;
         height: 20vw;
-        backdrop-filter: blur(2vw) brightness(0.6);
+        backdrop-filter: blur(2vw);
         margin-top: 20vw;
+        background: rgba($dark, 0.4);
         // box-shadow: 0 0 3vw -1vw rgba($dark, 1);
     }
     @keyframes bob {

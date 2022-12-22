@@ -56,19 +56,19 @@
     </ul>
     <div class="gallery">
         <ul>
-            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}">
+            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}">
                 <div class="col">
                     <p class="name"><em>{{user.firstname}}</em></p>
                     <div class="in">
-                        <div class="inner"><p>Gender</p><p>{{user.gender}}</p></div>
-                        <div class="inner"><p>Race</p><p>{{user.race}}</p></div>
-                        <div class="inner"><p>Height</p><p>{{user.height}}</p></div>
-                        <div class="inner"><p>Waist</p><p>{{user.waist}}</p></div>
-                        <div class="inner"><p>Hip</p><p>{{user.hip}}</p></div>
-                        <div class="inner"><p>Chest</p><p>{{user.chest}}</p></div>
-                        <div class="inner"><p>Eyes</p><p>{{user.eyes}}</p></div>
-                        <div class="inner"><p>Shoe</p><p>{{user.shoe}}</p></div>
-                        <div class="inner"><p>Hair</p><p>{{user.hair}}</p></div>
+                        <div class="inner"><p class="category">Gender</p><p>{{user.gender}}</p></div>
+                        <div class="inner"><p class="category">Race</p><p>{{user.race}}</p></div>
+                        <div class="inner"><p class="category">Height</p><p>{{parseInt(user.height / 12)}}' {{user.height % 12}}"</p></div>
+                        <div class="inner"><p class="category">Waist</p><p>{{user.waist}}"</p></div>
+                        <div class="inner"><p class="category">Hip</p><p>{{user.hip}}"</p></div>
+                        <div class="inner"><p class="category">Chest</p><p>{{user.chest}}"</p></div>
+                        <div class="inner"><p class="category">Shoe</p><p>{{user.shoe}}</p></div>
+                        <div class="inner"><p class="category">Eyes</p><p>{{user.eyes}}</p></div>
+                        <div class="inner"><p class="category">Hair</p><p>{{user.hair}}</p></div>
                     </div>
                 </div>
             </a>

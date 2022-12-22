@@ -70,6 +70,15 @@ const UserSchema = new Scheme({
     bio: {
         type: String,
         default: ""
+    },
+    instagram: {
+        type: String
+    },
+    headshot: {
+        type: String
+    },
+    bodyshot: {
+        type: String
     }
 },
 {

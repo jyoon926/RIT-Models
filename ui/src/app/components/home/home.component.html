@@ -1,12 +1,11 @@
 <div id="hero">
     <div class="carousel">
-        <ul id="carousel">
-            <a *ngFor="let n of array(20)">
-                <!-- <div class="image"></div> -->
-            </a>
-            <div id="carousel-end"></div>
-        </ul>
+        <div class="track">
+            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}"></a>
+            <a href="/models" class="all">View all models</a>
+        </div>
     </div>
-    <h1>Connecting <em>talent</em> and <em>beauty</em> within the RIT student body ♥</h1>
+    <h1>Connecting <em>talent</em> and <em>beauty</em> within the RIT student community ♥</h1>
     <p>A platform for bringing together photography students and aspiring models.</p>
+    <!-- <a href="/models" class="viewall">View all models</a> -->
 </div>

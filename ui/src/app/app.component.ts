@@ -1,6 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, ViewChild  } from '@angular/core';
 import { UserService } from './services/user.service';
-import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
 
@@ -15,8 +14,7 @@ export class AppComponent {
     constructor(
         private userService: UserService,
         public authService: AuthService
-    ) {
-    }
+    ) {}
 
     ngOnDestroy() {
         this.subscriptions.forEach((subscription) => subscription.unsubscribe());

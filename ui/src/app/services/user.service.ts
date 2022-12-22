@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { User } from './user';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class UserService {
-    private userUrl = environment.serverUrl + '/user/';
+    private userUrl = environment.serverUrl + '/user';
     private loggedInUser: any;
 
     httpOptions = {
@@ -35,7 +35,7 @@ export class UserService {
     }
 
     updateUser(user: User) {
-        return this.http.put(this.userUrl, user, this.httpOptions).pipe(tap(_ => console.log('updated user id=' + user._id)), catchError(this.handleError<any>('updateUser')));
+        return this.http.put(`${this.userUrl}/${user._id}`, user, this.httpOptions).pipe(tap(_ => console.log('updated user id=' + user._id)), catchError(this.handleError<any>('updateUser')));
     }
 
     deleteUser(id: number): Observable<User> {

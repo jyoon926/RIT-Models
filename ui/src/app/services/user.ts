@@ -16,4 +16,7 @@ export interface User {
     shoe: number;
     hair: string;
     bio: string;
+    instagram: string;
+    headshot: string;
+    bodyshot: string;
 }

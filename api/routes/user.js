@@ -68,7 +68,7 @@ router.put('/:id', (req, res, next) => {
         if (result.nModified === 0) {
             next(new Error(`Document could not be updated because _id ${req.params.id} does not exist on User model`));
         } else {
-            res.sendStatus(200);
+            res.json(result);
         }
     }).catch(error => next(error));
 });

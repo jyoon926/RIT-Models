@@ -17,6 +17,10 @@
         opacity: .6;
     }
     #register {
+        span {
+            color: rgb(192, 0, 0);
+            padding-left: 2px;
+        }
         label {
             width: fit-content;
         }
@@ -43,10 +47,6 @@
                     margin-bottom: -14px;
                 }
                 select {
-                    font-size: 1rem;
-                    padding: 4px 6px;
-                    box-sizing: border-box;
-                    border: 1px solid rgba($dark, 0.2);
                     max-width: 400px;
                 }
                 .checklist {
@@ -59,7 +59,7 @@
                     }
                     label {
                         padding: 4px 6px;
-                        border: 1px solid rgba($dark, 0.2);
+                        border: 1px solid rgba($dark, 0.3);
                     }
                 }
                 input[type=number] {
@@ -70,11 +70,6 @@
                 }
                 textarea {
                     max-width: 400px;
-                    padding: 4px 6px;
-                    border: 1px solid rgba($dark, 0.2);
-                    line-height: 1.5;
-                    resize: none;
-                    font-size: 1rem;
                 }
             }
         }
@@ -94,6 +89,18 @@
             flex-direction: column;
             gap: 20px;
             max-width: 640px;
+        }
+        .ig {
+            .at {
+                position: absolute;
+                margin: 7px 0 0 7px;
+                z-index: 1;
+                opacity: 0.6;
+                color: $dark;
+            }
+            input {
+                padding-left: 20px;
+            }
         }
         button {
             margin-top: 20px;
