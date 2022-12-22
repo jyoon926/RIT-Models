@@ -10,13 +10,13 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ModelComponent } from './components/model/model.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
     { path: 'models/:name', component: ModelComponent },
     { path: 'models', component: ModelsComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'profile', component: ProfileComponent }
+    { path: 'profile', component: ProfileComponent },
+    { path: '', component: HomeComponent }
 ];
 
 @NgModule({
