@@ -1,0 +1,81 @@
+<section>
+    <h1>Models</h1>
+    <!-- <h3>FILTERS</h3> -->
+    <ul class="filters">
+        <div id="gender" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Gender<a></a></a>
+            <div class="options select-child">
+                <a id="all-genders" class="option">All</a>
+                <a id="men" class="option">Men</a>
+                <a id="women" class="option">Women</a>
+                <a id="non-binary" class="option">Non-binary</a>
+            </div>
+        </div>
+        <div id="height" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Height<a></a></a>
+            <div class="options select-child">
+                <a id="all-heights" class="option">All</a>
+            </div>
+        </div>
+        <div id="waist" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Waist<a></a></a>
+            <div class="options select-child">
+                <a id="all-waists" class="option">All</a>
+            </div>
+        </div>
+        <div id="hip" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Hip<a></a></a>
+            <div class="options select-child">
+                <a id="all-hips" class="option">All</a>
+            </div>
+        </div>
+        <div id="bust" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Bust<a></a></a>
+            <div class="options select-child">
+                <a id="all-busts" class="option">All</a>
+            </div>
+        </div>
+        <div id="shoe" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Shoe<a></a></a>
+            <div class="options select-child">
+                <a id="all-shoes" class="option">All</a>
+            </div>
+        </div>
+        <div id="hair" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Hair<a></a></a>
+            <div class="options select-child">
+                <a id="all-hair" class="option">All</a>
+            </div>
+        </div>
+        <div id="eyes" class="select">
+            <a class="select-button select-child" (click)="dropdown($event.target)">Eyes<a></a></a>
+            <div class="options select-child">
+                <a id="all-eyes" class="option">All</a>
+            </div>
+        </div>
+    </ul>
+    <div class="gallery">
+        <ul>
+            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}">
+                <div class="col">
+                    <p class="name"><em>{{user.firstname}}</em></p>
+                    <div class="in">
+                        <div class="inner"><p class="category">Gender</p><p>{{user.gender}}</p></div>
+                        <div class="inner"><p class="category">Race</p><p>{{user.race}}</p></div>
+                        <div class="inner"><p class="category">Height</p><p>{{parseInt(user.height / 12)}}' {{user.height % 12}}"</p></div>
+                        <div class="inner"><p class="category">Waist</p><p>{{user.waist}}"</p></div>
+                        <div class="inner"><p class="category">Hip</p><p>{{user.hip}}"</p></div>
+                        <div class="inner"><p class="category">Chest</p><p>{{user.chest}}"</p></div>
+                        <div class="inner"><p class="category">Shoe</p><p>{{user.shoe}}</p></div>
+                        <div class="inner"><p class="category">Eyes</p><p>{{user.eyes}}</p></div>
+                        <div class="inner"><p class="category">Hair</p><p>{{user.hair}}</p></div>
+                    </div>
+                </div>
+            </a>
+            <!-- <a *ngFor="let n of array(20)">
+                <div class="image"></div>
+                <p class="name">First L.</p>
+            </a> -->
+        </ul>
+    </div>
+</section>

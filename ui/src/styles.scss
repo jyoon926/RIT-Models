@@ -1,1 +1,73 @@
-/* You can add global styles to this file, and also import other style files */
+$dark: #222;
+$light: #f3f3f3;
+
+* {
+    font-family: 'neue-haas-grotesk-text', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: $dark;
+    box-sizing: border-box;
+    line-height: 1;
+}
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+    background: $light;
+}
+a {
+    text-decoration: none;
+}
+.italic, em {
+    font-family: big-caslon-fb, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.1em;
+}
+h1 {
+    font-size: 8rem;
+}
+h2 {
+    font-size: 4rem;
+}
+h3 {
+    font-size: 2rem;
+}
+input:not([type=checkbox]) {
+    all: unset;
+    font-size: 1rem;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    border: 1px solid rgba($dark, 0.3);
+    transition-duration: .3s;
+    background: $light;
+    &:focus {
+        border: 1px solid $dark;
+    }
+}
+select {
+    font-size: 1rem;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    border: 1px solid rgba($dark, 0.3);
+    background: $light;
+}
+textarea {
+    padding: 4px 6px;
+    border: 1px solid rgba($dark, 0.3);
+    line-height: 1.5;
+    resize: none;
+    font-size: 1rem;
+    background: $light;
+}
+button {
+    all: unset;
+    background: $dark;
+    color: $light;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    transition-duration: .3s;
+    &:hover {
+        opacity: .6;
+        cursor: pointer;
+    }
+}
