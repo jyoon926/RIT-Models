@@ -9,23 +9,23 @@
             <div class="basic list">
                 <h3><em>Account Info</em></h3>
 
-                <label for="firstname">First Name</label>
+                <label for="firstname">First Name<span>*</span></label>
                 <input id="firstname" type="text" name="firstname" required [(ngModel)]="user.firstname" />
 
-                <label for="lastname">Last Name</label>
+                <label for="lastname">Last Name<span>*</span></label>
                 <input id="lastname" type="text" name="lastname" required [(ngModel)]="user.lastname" />
 
-                <label for="email">Email</label>
-                <input id="email" type="text" name="email" required [(ngModel)]="user.email" />
+                <label for="email">Email<span>*</span><b> (must be rit.edu)</b></label>
+                <input id="email" type="text" name="email" required [(ngModel)]="user.email" pattern="^([a-zA-Z0-9_\-\.]+)@rit.edu$"/>
         
-                <label for="password">Password</label>
+                <label for="password">Password<span>*</span></label>
                 <input id="password" type="password" autocomplete="off" name="password" required [(ngModel)]="user.password" />
             </div>
 
             <div class="personal list">
                 <h3><em>Model Info</em></h3>
 
-                <label for="gender">Gender</label>
+                <label for="gender">Gender<span>*</span></label>
                 <select name="gender" id="gender" [(ngModel)]="user.gender" required>
                     <option value="Man">Man</option>
                     <option value="Woman">Woman</option>
@@ -34,7 +34,7 @@
                     <option value="N/A">Prefer not to say</option>
                 </select>
 
-                <label for="race">Race <b>(select multiple with the ctrl or cmd key)</b></label>
+                <label for="race">Race<span>*</span><b> (select multiple with the ctrl or cmd key)</b></label>
                 <select name="race" id="race" [(ngModel)]="user.race" multiple required>
                     <option value="Black or African American">Black or African American</option>
                     <option value="Asian">Asian</option>
@@ -47,7 +47,7 @@
                 </select>
 
                 <div class="small">
-                    <label for="height">Height <b>(in)</b></label>
+                    <label for="height">Height<span>*</span><b> (in)</b></label>
                     <input id="height" type="number" required name="height" [(ngModel)]="user.height" (keydown)="keydown($event)" />
                 </div>
                 <div class="small">
@@ -105,10 +105,10 @@
                     <span class="at">@</span>
                     <input id="instagram" type="text" name="instagram" [(ngModel)]="user.instagram" style="width: 150px;"/>
                 </div>
-                <label for="headshot">Headshot</label>
+                <label for="headshot">Headshot<span>*</span></label>
                 <img src="{{getImage(user.headshot)}}" alt="">
                 <input id="headshot" type="file" name="headshot" ngModel style="width: 250px;"  (change)="selectHeadshot($event)" />
-                <label for="bodyshot">Body Shot</label>
+                <label for="bodyshot">Body Shot<span>*</span></label>
                 <img src="{{getImage(user.bodyshot)}}" alt="">
                 <input id="bodyshot" type="file" name="bodyshot" ngModel style="width: 250px;" (change)="selectBodyshot($event)" />
 

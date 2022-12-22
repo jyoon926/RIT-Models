@@ -134,9 +134,7 @@ export class ProfileComponent implements OnInit {
         this.bodyshot = event.target.files;
     }
 
-    update(form: any): void {        
-        if (!/^([a-zA-Z0-9_\-\.]+)@rit.edu$/.test(form.email))
-            return;
+    update(form: any): void {
         let user = {
             "_id": this.user?._id,
             "email": form.email.trim(),

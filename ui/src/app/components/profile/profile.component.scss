@@ -11,6 +11,10 @@ h1 {
     font-weight: normal;
 }
 form {
+    span {
+        color: rgb(192, 0, 0);
+        padding-left: 2px;
+    }
     em {
         font-style: normal;
     }
@@ -93,6 +97,7 @@ form {
             margin: 7px 0 0 7px;
             z-index: 1;
             opacity: 0.6;
+            color: $dark;
         }
         input {
             padding-left: 20px;
