@@ -1,12 +1,13 @@
-
 <header>
-    <a routerLink="/" id="title" class="italic"><img src="../assets/images/logo-transparent-700.png" alt="">Models @ RIT</a>
+    <a routerLink="/" id="title" class="italic" (click)="hideMenu()"><img src="../assets/images/logo-transparent-700.png" alt="">Models @ RIT</a>
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox" id="menu-button"><span class="top"></span><span class="mid"></span><span class="bot"></span></label>
     <ul>
-        <a routerLink="/models">Models</a>
-        <a routerLink="/about">About</a>
-        <a routerLink="/login" *ngIf="!(authService.isLoggedIn$ | async)">Login</a>
-        <a routerLink="/profile" class="profile" *ngIf="(authService.isLoggedIn$ | async)">Your profile</a>
-        <a routerLink="/register" class="sign-up" *ngIf="!(authService.isLoggedIn$ | async)">Become a model</a>
+        <a routerLink="/models" (click)="hideMenu()">Models</a>
+        <a routerLink="/about" (click)="hideMenu()">About</a>
+        <a routerLink="/login" *ngIf="!(authService.isLoggedIn$ | async)" (click)="hideMenu()">Login</a>
+        <a routerLink="/profile" class="profile" *ngIf="(authService.isLoggedIn$ | async)" (click)="hideMenu()">Your profile</a>
+        <a routerLink="/register" class="sign-up" *ngIf="!(authService.isLoggedIn$ | async)" (click)="hideMenu()">Become a model</a>
     </ul>
 </header>
 <div id="cursor"><div class="inner"></div></div>

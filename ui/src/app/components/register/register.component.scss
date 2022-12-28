@@ -73,12 +73,6 @@
                 }
             }
         }
-        .flow {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
         .small {
             label {
                 margin-right: 10px;
@@ -147,6 +141,28 @@
             padding: 8px 12px;
             font-style: italic;
             margin-top: -20px;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #section-register {
+        padding: 200px 20px;
+        h1 {
+            font-size: 4rem;
+        }
+        #register {
+            .row {
+                flex-direction: column;
+                .basic {
+                    max-width: 100%;
+                }
+            }
+            button {
+                &::before, &::after {
+                    display: none;
+                }
+            }
         }
     }
 }

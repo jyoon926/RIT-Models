@@ -96,3 +96,27 @@ h1 {
         }
     }
 }
+@media screen and (max-width: 800px) {
+    section {
+        padding: 200px 20px;
+    }
+    h1 {
+        font-size: 6rem;
+    }
+    .row {
+        flex-direction: column;
+        .image {
+            width: 100%;
+            aspect-ratio: 0.75;
+            height: auto;
+        }
+        .col {
+            width: 100%;
+            .track {
+                .thumbnail {
+                    width: 100px;
+                }
+            }
+        }
+    }
+}

@@ -19,6 +19,13 @@ export class AppComponent {
     ngOnDestroy() {
         this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     }
+
+    hideMenu() {
+        let checkbox = document.getElementById("checkbox") as HTMLInputElement;
+        if (checkbox.checked) {
+            checkbox.checked = false;
+        }
+    }
 }
 
 let cursor = document.getElementById('cursor');

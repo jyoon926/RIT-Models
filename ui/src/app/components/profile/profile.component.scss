@@ -150,3 +150,23 @@ form {
         margin-top: -20px;
     }
 }
+@media screen and (max-width: 800px) {
+    section {
+        padding: 200px 20px;
+        h1 {
+            font-size: 4rem;
+        }
+    }
+    form .row {
+        flex-direction: column;
+        margin-bottom: 40px;
+        .basic {
+            max-width: 100%;
+        }
+        #save {
+            &::before, &::after {
+                display: none;
+            }
+        }
+    }
+}
