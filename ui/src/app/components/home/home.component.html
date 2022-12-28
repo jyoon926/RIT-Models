@@ -1,8 +1,8 @@
 <div id="hero">
     <div class="carousel">
         <div class="track">
-            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}"></a>
             <a routerLink="/models" class="all">View all models</a>
+            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}"></a>
         </div>
     </div>
     <h1>Connecting <em>talent</em> and <em>beauty</em> within the RIT student community ♥</h1>
