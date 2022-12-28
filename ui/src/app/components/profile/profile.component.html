@@ -1,9 +1,12 @@
 <section>
     <h1>Model Profile</h1>
 
-    <p style="margin-bottom: 40px; opacity: 0.7; ">Edit the information on your model profile.</p>
-
     <form autocomplete="off" #form="ngForm" (ngSubmit)="upload(form.value)" [noValidate]="false" *ngIf="user">
+        <div class="buttons">
+            <button routerLink='/models/{{user.fullname}}'>View public profile</button>
+            <button (click)="logOut()" class="logout">Log out</button>
+        </div>
+        <p>Make changes to your profile:</p>
 
         <div class="row">
             <div class="basic list">
@@ -115,7 +118,5 @@
                 <button id="save" type='submit'>Save changes</button>
             </div>
         </div>
-        <button routerLink='/models/{{user.fullname}}'>View public profile</button><br><br>
-        <button (click)="logOut()">Log out</button>
     </form>
 </section>
