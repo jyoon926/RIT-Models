@@ -101,7 +101,9 @@ export class ProfileComponent implements OnInit {
                         this.headshotName = event.filename;
                         this.uploadBodyshot(form);
                     },
-                    error: (err: any) => {}
+                    error: (err: any) => {
+                        alert("Error uploading head shot.");
+                    }
                 });
             }
         } else {
@@ -118,7 +120,9 @@ export class ProfileComponent implements OnInit {
                         this.bodyshotName = event.filename;
                         this.update(form);
                     },
-                    error: (err: any) => {}
+                    error: (err: any) => {
+                        alert("Error uploading body shot.");
+                    }
                 });
             }
         } else {
@@ -127,11 +131,23 @@ export class ProfileComponent implements OnInit {
     }
     
     selectHeadshot(event: any): void {
-        this.headshot = event.target.files;
+        if(event.target.files[0].size > 5000000) {
+            console.log("no");
+            event.target.value = "";
+            alert("File cannot exceed 5MB.");
+        } else {
+            this.headshot = event.target.files;
+        }
     }
     
     selectBodyshot(event: any): void {
-        this.bodyshot = event.target.files;
+        if(event.target.files[0].size > 5000000) {
+            console.log("no");
+            event.target.value = "";
+            alert("File cannot exceed 5MB.");
+        } else {
+            this.bodyshot = event.target.files;
+        }
     }
 
     update(form: any): void {
@@ -160,7 +176,9 @@ export class ProfileComponent implements OnInit {
             next: (event: any) => {
                 location.reload();
             },
-            error: (err: any) => {}
+            error: (err: any) => {
+                alert("There was an unexpected error.");
+            }
         });
     }
 }

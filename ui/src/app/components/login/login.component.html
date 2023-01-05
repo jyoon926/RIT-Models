@@ -6,7 +6,7 @@
         <input id="email" type="text" #email required />
         <label for="password">Password</label>
         <input id="password" type="password" #password required />
-        <button type='button' (click)="logIn(email.value, password.value);">Log in</button>
+        <button type='submit' (click)="logIn(email.value, password.value);">Log in</button>
         <p>Don't have an account? <a routerLink="/register">Register</a></p>
         <p id="failed">Login failed</p>
     </form>

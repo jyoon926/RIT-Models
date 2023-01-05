@@ -13,8 +13,10 @@ export class LoginComponent {
 
     logIn(email: string, password: string): void {
         this.authService.logIn(email, password).subscribe(
-            (response: any) => {
+            res => {
                 this.router.navigate(['/profile']);
+            }, err => {
+                this.loginFailed();
             }
         );
     }
@@ -23,7 +25,11 @@ export class LoginComponent {
         console.log("failed");
         let p = document.getElementById('failed');
         if (p != null) {
-            p.style.opacity = "0.6";
+            const animation = p.animate(
+                [{ opacity: 0.6 }, { opacity: 0 }],
+                { easing: 'ease', duration: 5000 }
+            );
+            animation.play();
         }
     }
 }

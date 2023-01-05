@@ -47,6 +47,12 @@ input:not([type=checkbox]) {
     &:focus {
         border: 1px solid $dark;
     }
+    &:required {
+        background: rgba(red, 0.075);
+    }
+    &:valid {
+        background: $light;
+    }
 }
 select {
     font-size: 1rem;
@@ -54,6 +60,12 @@ select {
     box-sizing: border-box;
     border: 1px solid rgba($dark, 0.3);
     background: $light;
+    &:required {
+        background: rgba(red, 0.075);
+    }
+    &:valid {
+        background: $light;
+    }
 }
 textarea {
     padding: 4px 6px;

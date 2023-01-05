@@ -101,7 +101,7 @@ form {
     .ig {
         .at {
             position: absolute;
-            margin: 7px 0 0 7px;
+            margin: 7px 0 0 5px;
             z-index: 1;
             opacity: 0.6;
             color: $dark;
@@ -120,8 +120,8 @@ form {
         justify-content: center;
         align-items: center;
         border: 1px solid $dark;
-        background: none;
-        color: $dark;
+        background: $dark;
+        color: $light;
         &::before, &::after {
             width: calc(100% - 80px);
             max-width: 300px;
@@ -136,6 +136,8 @@ form {
         }
         &:hover {
             opacity: 1;
+            background: none;
+            color: $dark;
             &::before {
                 transform: translate(4px, -4px);
             }

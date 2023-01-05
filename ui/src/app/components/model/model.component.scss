@@ -62,6 +62,7 @@ h1 {
             max-width: 400px;
             display: flex;
             flex-direction: column;
+            text-align: right;
         }
         .inner {
             width: 100%;
@@ -116,6 +117,9 @@ h1 {
                 .thumbnail {
                     width: 100px;
                 }
+            }
+            .info {
+                max-width: 100%;
             }
         }
     }

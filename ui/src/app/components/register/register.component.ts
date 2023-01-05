@@ -46,8 +46,10 @@ export class RegisterComponent {
             "bodyshot": this.bodyshotName? this.bodyshotName : ""
         };
         this.userService.register(user as unknown as User).subscribe(() => {
-            this.authService.logIn(user.email, user.password).subscribe(() => {
+            this.authService.logIn(user.email, user.password).subscribe(res => {
                 this.router.navigate(['/profile']);
+            }, err => {
+                alert("There was an unexpected error while registering.");
             });
         });
     }
@@ -81,21 +83,37 @@ export class RegisterComponent {
                                         this.bodyshotName = event.filename;
                                         this.register(form);
                                     },
-                                    error: (err: any) => {}
+                                    error: (err: any) => {
+                                        alert("Error uploading body shot.");
+                                    }
                                 });
                             }
                         }},
-                    error: (err: any) => {}
+                    error: (err: any) => {
+                        alert("Error uploading head shot.");
+                    }
                 });
             }
         }
     }
     
     selectHeadshot(event: any): void {
-        this.headshot = event.target.files;
+        if(event.target.files[0].size > 5000000) {
+            console.log("no");
+            event.target.value = "";
+            alert("File cannot exceed 5MB.");
+        } else {
+            this.headshot = event.target.files;
+        }
     }
     
     selectBodyshot(event: any): void {
-        this.bodyshot = event.target.files;
+        if(event.target.files[0].size > 5000000) {
+            console.log("no");
+            event.target.value = "";
+            alert("File cannot exceed 5MB.");
+        } else {
+            this.bodyshot = event.target.files;
+        }
     }
 }

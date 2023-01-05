@@ -52,6 +52,13 @@
             font-style: italic;
             margin-top: -20px;
         }
+        @keyframes fadeOut {
+            from {
+                opacity: 0.6;
+            } to {
+                opacity: 0;
+            }
+        }
     }
     .logocontainer {
         width: 50%;
