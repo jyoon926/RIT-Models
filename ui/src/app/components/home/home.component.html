@@ -1,10 +1,18 @@
 <div id="hero">
+    <div class="images">
+        <div *ngFor="let user of users; let i = index" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}" [attr.data-index]="i" alt="" class="model-image"></div>
+        <!-- <img *ngFor="let user of users; let i = index" src="{{getImage(user.headshot)}}" [attr.data-index]="i" alt="" class="model-image"/> -->
+    </div>
     <div class="carousel">
         <div class="track">
             <a routerLink="/models" class="all">View all models</a>
             <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}"></a>
         </div>
     </div>
-    <h1>Connecting <em>talent</em> and <em>beauty</em> within the RIT student community</h1>
-    <p>A platform for bringing together photography students and aspiring models.</p>
+    <h1>Connecting <em>photographers</em><br> and <em>models</em> at RIT</h1>
+    <p>Find your next modeling opportunity or the perfect model for your next project.</p>
+    <div class="links">
+        <a routerLink="/models">Find a model</a>
+        <a routerLink="/register">Become a model</a>
+    </div>
 </div>
