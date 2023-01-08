@@ -1,5 +1,5 @@
 $dark: #000;
-$light: #fff;
+$light: #f5f4f5;
 
 * {
     font-family: 'neue-haas-grotesk-text', sans-serif;
@@ -35,7 +35,7 @@ h2 {
 h3 {
     font-size: 2rem;
 }
-input:not([type=checkbox]) {
+input:not([type=checkbox]):not([type=range]) {
     all: unset;
     font-size: 1rem;
     padding: 4px 6px;

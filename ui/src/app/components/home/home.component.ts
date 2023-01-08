@@ -85,7 +85,7 @@ const distanceFromLast = (x: number, y: number) => {
     return Math.hypot(x - last.x, y - last.y);
 }
 window.onmousemove = e => {
-    if (distanceFromLast(e.clientX, e.clientY) > (window.innerWidth / 20)) {
+    if (distanceFromLast(e.clientX, e.clientY) > (window.innerWidth / 25)) {
         const lead = images[globalIndex % images.length],
                 tail = images[(globalIndex - Math.min(12, images.length - 1)) % images.length];
         activate(lead as HTMLElement, e.clientX, e.clientY);

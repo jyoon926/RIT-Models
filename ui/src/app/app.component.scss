@@ -120,7 +120,7 @@ header {
     }
 }
 #grain {
-    z-index: 11;
+    z-index: 100;
     position: fixed;
     width:200vw;
     height: 200vh;
@@ -129,10 +129,10 @@ header {
     overflow: hidden;
     pointer-events: none;
     background-image: url('../assets/images/grain.png');
-    animation: grain 1s steps(5) infinite;
+    animation: grain 1.5s steps(5) infinite;
     mix-blend-mode: multiply;
-    filter: opacity(.4);
-    // opacity: 1;
+    // backdrop-filter: blur(1px);
+    opacity: 0.15;
 }
 @keyframes grain {
     0%, 100% {transform: translate(0,0);}

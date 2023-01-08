@@ -1,8 +1,8 @@
+<div class="images">
+    <a *ngFor="let user of users; let i = index" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}" [attr.data-index]="i" alt="" class="model-image"></a>
+    <!-- <img *ngFor="let user of users; let i = index" src="{{getImage(user.headshot)}}" [attr.data-index]="i" alt="" class="model-image"/> -->
+</div>
 <div id="hero">
-    <div class="images">
-        <a *ngFor="let user of users; let i = index" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}" [attr.data-index]="i" alt="" class="model-image"></a>
-        <!-- <img *ngFor="let user of users; let i = index" src="{{getImage(user.headshot)}}" [attr.data-index]="i" alt="" class="model-image"/> -->
-    </div>
     <div class="carousel">
         <div class="track">
             <a routerLink="/models" class="all">View all models</a>

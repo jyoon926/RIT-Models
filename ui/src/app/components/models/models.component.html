@@ -1,68 +1,96 @@
 <section>
     <h1>Models</h1>
-    <!-- <h3>FILTERS</h3> -->
-    <ul class="filters">
-        <div id="gender" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Gender<a></a></a>
-            <div class="options select-child">
-                <a id="all-genders" class="option">All</a>
-                <a id="men" class="option">Men</a>
-                <a id="women" class="option">Women</a>
-                <a id="non-binary" class="option">Non-binary</a>
-            </div>
+    <input type="checkbox" id="filter-checkbox">
+    <label for="filter-checkbox" id="filter-button">Filters<p></p></label>
+    <div id="filters">
+        <p>Gender</p>
+        <div class="row">
+            <label for="men">men<input type="checkbox" id="men" checked (change)="changeFilters()"></label>
+            <label for="women">women<input type="checkbox" id="women" checked (change)="changeFilters()"></label>
+            <label for="non-binary">non-binary<input type="checkbox" id="non-binary" checked (change)="changeFilters()"></label>
+            <label for="other-gender">other<input type="checkbox" id="other-gender" checked (change)="changeFilters()"></label>
         </div>
-        <div id="height" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Height<a></a></a>
-            <div class="options select-child">
-                <a id="all-heights" class="option">All</a>
+        <p>Height</p>
+        <div class="range_container">
+            <p class="from" #heightFromDisplay>4' 0"</p>
+            <div class="sliders_control">
+                <input id="heightFrom" class="fromSlider" type="range" value="48" min="48" max="90" #heightFrom (input)="changeFrom(heightFrom, heightTo, heightFromDisplay, 0)" (change)="changeFilters()"/>
+                <input id="heightTo" type="range" value="90" min="48" max="90" #heightTo (input)="changeTo(heightFrom, heightTo, heightToDisplay, 0)" (change)="changeFilters()"/>
             </div>
+            <p class="to" #heightToDisplay>7' 6"</p>
         </div>
-        <div id="waist" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Waist<a></a></a>
-            <div class="options select-child">
-                <a id="all-waists" class="option">All</a>
+        <p>Waist</p>
+        <div class="range_container">
+            <p class="from" #waistFromDisplay>20"</p>
+            <div class="sliders_control">
+                <input id="waistFrom" class="fromSlider" type="range" value="20" min="20" max="50" #waistFrom (input)="changeFrom(waistFrom, waistTo, waistFromDisplay, 1)" (change)="changeFilters()"/>
+                <input id="waistTo" type="range" value="50" min="20" max="50" #waistTo (input)="changeTo(waistFrom, waistTo, waistToDisplay, 1)" (change)="changeFilters()"/>
             </div>
+            <p class="to" #waistToDisplay>50"</p>
         </div>
-        <div id="hip" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Hip<a></a></a>
-            <div class="options select-child">
-                <a id="all-hips" class="option">All</a>
+        <p>Hip</p>
+        <div class="range_container">
+            <p class="from" #hipFromDisplay>20"</p>
+            <div class="sliders_control">
+                <input id="hipFrom" class="fromSlider" type="range" value="20" min="20" max="50" #hipFrom (input)="changeFrom(hipFrom, hipTo, hipFromDisplay, 1)" (change)="changeFilters()"/>
+                <input id="hipTo" type="range" value="50" min="20" max="50" #hipTo (input)="changeTo(hipFrom, hipTo, hipToDisplay, 1)" (change)="changeFilters()"/>
             </div>
+            <p class="to" #hipToDisplay>50"</p>
         </div>
-        <div id="bust" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Bust<a></a></a>
-            <div class="options select-child">
-                <a id="all-busts" class="option">All</a>
+        <p>Chest</p>
+        <div class="range_container">
+            <p class="from" #chestFromDisplay>20"</p>
+            <div class="sliders_control">
+                <input id="chestFrom" class="fromSlider" type="range" value="20" min="20" max="60" #chestFrom (input)="changeFrom(chestFrom, chestTo, chestFromDisplay, 1)" (change)="changeFilters()"/>
+                <input id="chestTo" type="range" value="60" min="20" max="60" #chestTo (input)="changeTo(chestFrom, chestTo, chestToDisplay, 1)" (change)="changeFilters()"/>
             </div>
+            <p class="to" #chestToDisplay>60"</p>
         </div>
-        <div id="shoe" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Shoe<a></a></a>
-            <div class="options select-child">
-                <a id="all-shoes" class="option">All</a>
+        <p>Shoe</p>
+        <div class="range_container">
+            <p class="from" #shoeFromDisplay>4</p>
+            <div class="sliders_control">
+                <input id="shoeFrom" class="fromSlider" type="range" value="4" min="4" max="15" #shoeFrom (input)="changeFrom(shoeFrom, shoeTo, shoeFromDisplay, 2)" (change)="changeFilters()"/>
+                <input id="shoeTo" type="range" value="15" min="4" max="15" #shoeTo (input)="changeTo(shoeFrom, shoeTo, shoeToDisplay, 2)" (change)="changeFilters()"/>
             </div>
+            <p class="to" #shoeToDisplay>15</p>
         </div>
-        <div id="hair" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Hair<a></a></a>
-            <div class="options select-child">
-                <a id="all-hair" class="option">All</a>
-            </div>
+        <p>Hair</p>
+        <div class="row">
+            <label for="hair-black">black<input type="checkbox" id="hair-black" checked (change)="changeFilters()"></label>
+            <label for="hair-brown">brown<input type="checkbox" id="hair-brown" checked (change)="changeFilters()"></label>
+            <label for="hair-blue">blue<input type="checkbox" id="hair-blue" checked (change)="changeFilters()"></label>
+            <label for="hair-hazel">hazel<input type="checkbox" id="hair-hazel" checked (change)="changeFilters()"></label>
+            <label for="hair-green">green<input type="checkbox" id="hair-green" checked (change)="changeFilters()"></label>
+            <label for="hair-gray">gray<input type="checkbox" id="hair-gray" checked (change)="changeFilters()"></label>
+            <label for="hair-red">red<input type="checkbox" id="hair-red" checked (change)="changeFilters()"></label>
+            <label for="hair-amber">amber<input type="checkbox" id="hair-amber" checked (change)="changeFilters()"></label>
+            <label for="hair-other">other<input type="checkbox" id="hair-other" checked (change)="changeFilters()"></label>
         </div>
-        <div id="eyes" class="select">
-            <a class="select-button select-child" (click)="dropdown($event.target)">Eyes<a></a></a>
-            <div class="options select-child">
-                <a id="all-eyes" class="option">All</a>
-            </div>
+        <p>Eyes</p>
+        <div class="row">
+            <label for="eyes-black">black<input type="checkbox" id="eyes-black" checked (change)="changeFilters()"></label>
+            <label for="eyes-brown">brown<input type="checkbox" id="eyes-brown" checked (change)="changeFilters()"></label>
+            <label for="eyes-blonde">blonde<input type="checkbox" id="eyes-blonde" checked (change)="changeFilters()"></label>
+            <label for="eyes-red">red<input type="checkbox" id="eyes-red" checked (change)="changeFilters()"></label>
+            <label for="eyes-gray">gray<input type="checkbox" id="eyes-gray" checked (change)="changeFilters()"></label>
+            <label for="eyes-white">white<input type="checkbox" id="eyes-white" checked (change)="changeFilters()"></label>
+            <label for="eyes-blue">blue<input type="checkbox" id="eyes-blue" checked (change)="changeFilters()"></label>
+            <label for="eyes-purple">purple<input type="checkbox" id="eyes-purple" checked (change)="changeFilters()"></label>
+            <label for="eyes-pink">pink<input type="checkbox" id="eyes-pink" checked (change)="changeFilters()"></label>
+            <label for="eyes-green">green<input type="checkbox" id="eyes-green" checked (change)="changeFilters()"></label>
+            <label for="eyes-other">other<input type="checkbox" id="eyes-other" checked (change)="changeFilters()"></label>
         </div>
-    </ul>
+    </div>
     <div class="gallery">
         <ul>
-            <a *ngFor="let user of users" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}">
+            <a *ngFor="let user of displayedUsers" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image':' url(' + getImage(user.headshot) + ')'}">
                 <div class="col">
                     <p class="name"><em>{{user.firstname}}</em></p>
                     <div class="in">
                         <div class="inner"><p class="category">Gender</p><p>{{user.gender}}</p></div>
                         <div class="inner"><p class="category">Race</p><p>{{user.race}}</p></div>
-                        <div class="inner"><p class="category">Height</p><p>{{parseInt(user.height / 12)}}' {{user.height % 12}}"</p></div>
+                        <div class="inner"><p class="category">Height</p><p>{{floor(user.height / 12)}}' {{user.height % 12}}"</p></div>
                         <div class="inner"><p class="category">Waist</p><p>{{user.waist}}"</p></div>
                         <div class="inner"><p class="category">Hip</p><p>{{user.hip}}"</p></div>
                         <div class="inner"><p class="category">Chest</p><p>{{user.chest}}"</p></div>
@@ -74,5 +102,5 @@
             </a>
         </ul>
     </div>
-    <p *ngIf="users.length == 0">There are no models to view.</p>
+    <p *ngIf="displayedUsers.length == 0">There are no models to view! Try changing your filters.</p>
 </section>
