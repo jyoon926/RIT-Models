@@ -44,6 +44,8 @@ header {
         }
         .sign-up, .profile {
             padding: 14px 28px;
+            background: rgba($dark, 1);
+            color: $light;
             border: 1px solid $dark;
             border-bottom: 1px solid rgba($dark, 1) !important;
             transition-duration: .4s;
@@ -63,6 +65,8 @@ header {
             }
             &:hover {
                 border: 1px solid rgba($dark, 1);
+                background: rgba($dark, 0);
+                color: $dark;
                 &::before {
                     transform: translate(4px, -4px);
                     border: 1px solid rgba($dark, 1);
