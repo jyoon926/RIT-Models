@@ -1,16 +1,22 @@
 $dark: #000;
 $light: #f5f4f5;
 
+@font-face {
+    font-family: 'Radio Grotesk';
+    src: url('./assets/fonts/PPRadioGrotesk/PPRadioGrotesk-Regular.otf');
+}
 * {
-    font-family: 'neue-haas-grotesk-text', sans-serif;
+    font-family: 'Radio Grotesk', sans-serif;
     margin: 0;
     padding: 0;
     color: $dark;
     box-sizing: border-box;
     line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 html {
-    font-size: 14px;
+    font-size: 15px;
     scroll-behavior: smooth;
     background: $light;
     overflow-x: hidden;

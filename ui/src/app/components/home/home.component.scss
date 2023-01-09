@@ -8,8 +8,8 @@
         top: 0; left: 0;
         overflow: hidden;
         mix-blend-mode: multiply;
-        opacity: 0.5;
-        filter: blur(0.1vh);
+        opacity: 0.7;
+        filter: blur(0.05vh) saturate(1.25);
         .model-image {
             position: absolute;
             height: 40vh;
