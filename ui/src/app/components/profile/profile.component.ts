@@ -131,20 +131,20 @@ export class ProfileComponent implements OnInit {
     }
     
     selectHeadshot(event: any): void {
-        if(event.target.files[0].size > 10000000) {
+        if(event.target.files[0].size > 5000000) {
             console.log("no");
             event.target.value = "";
-            alert("File cannot exceed 10MB.");
+            alert("File cannot exceed 5MB.");
         } else {
             this.headshot = event.target.files;
         }
     }
     
     selectBodyshot(event: any): void {
-        if(event.target.files[0].size > 10000000) {
+        if(event.target.files[0].size > 5000000) {
             console.log("no");
             event.target.value = "";
-            alert("File cannot exceed 10MB.");
+            alert("File cannot exceed 5MB.");
         } else {
             this.bodyshot = event.target.files;
         }
