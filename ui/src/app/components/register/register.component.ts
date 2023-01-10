@@ -31,6 +31,7 @@ export class RegisterComponent {
             "firstname": form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
             "lastname": form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
             "fullname": form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
+            "public": false,
             "gender": form.gender,
             "race": form.race,
             "height": form.height as number,
