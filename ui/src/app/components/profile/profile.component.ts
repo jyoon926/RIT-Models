@@ -181,4 +181,14 @@ export class ProfileComponent implements OnInit {
             }
         });
     }
+
+    togglePublic(user: User): void {
+        user.public = !user.public;
+        this.userService.updateUser(user).subscribe({
+            next: (event: any) => {
+                console.log("User is now " + (event.public?"public":"private"));
+                
+            }
+        });
+    }
 }

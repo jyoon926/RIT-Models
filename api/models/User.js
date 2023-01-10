@@ -28,6 +28,11 @@ const UserSchema = new Scheme({
         type: Boolean,
         default: false
     },
+    public: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
     gender: {
         type: String,
         enum: ['Man', 'Woman', 'Non-binary/non-conforming', 'Other', 'N/A'],
