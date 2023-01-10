@@ -30,8 +30,7 @@ const UserSchema = new Scheme({
     },
     public: {
         type: Boolean,
-        default: false,
-        required: true
+        default: false
     },
     gender: {
         type: String,
