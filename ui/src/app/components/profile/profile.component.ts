@@ -32,9 +32,13 @@ export class ProfileComponent implements OnInit {
     }
 
     getUser(): void {
+        console.log(this.authService.getLoggedInUser());
+        
         this.userService.getUser(this.authService.getLoggedInUser()).subscribe(
             response => {
                 this.user = response;
+                console.log(this.user.ispublic);
+                
                 this.getImages();
                 if (response == null)
                     this.router.navigate(['/login'])
@@ -158,7 +162,7 @@ export class ProfileComponent implements OnInit {
             "firstname": form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
             "lastname": form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
             "fullname": form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
-            "public": form.public as boolean,
+            "ispublic": form.public,
             "gender": form.gender,
             "race": form.race,
             "height": form.height as number,
@@ -173,6 +177,7 @@ export class ProfileComponent implements OnInit {
             "headshot": this.headshotName ? this.headshotName : this.user?.headshot,
             "bodyshot": this.bodyshotName ? this.bodyshotName : this.user?.bodyshot
         };
+        console.log(user.ispublic);
         
         this.userService.updateUser(user as unknown as User).subscribe({
             next: (event: any) => {
@@ -184,12 +189,14 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    togglePublic(user: User, event: Event): void {
+    togglePublic(user: User, event: Event, form: any): void {
         event.stopPropagation();
-        // user.public = false;
-        console.log(user.ispublic);
+        this.update(form);
+        // console.log(user.ispublic);
+        // user.ispublic = true;
+        // console.log(user.ispublic);
         
-        this.userService.updateUser(user).subscribe({
-        });
+        // this.userService.updateUser(user).subscribe({
+        // });
     }
 }
