@@ -54,7 +54,7 @@ router.post('/login', async (req, res, next) => {
         (result) => {
             if (result) {
                 const token = jwt.sign({ id: result._id }, 'secretkey');
-                res.json({"token": token, "name": result._id});
+                res.json({"token": token, "name": result.fullname});
                 console.log("Logged in to " + result.fullname);
             } else {
                 res.sendStatus(401);
