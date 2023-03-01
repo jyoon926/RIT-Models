@@ -28,7 +28,7 @@ const UserSchema = new Scheme({
         type: Boolean,
         default: false
     },
-    public: {
+    ispublic: {
         type: Boolean,
         default: false
     },

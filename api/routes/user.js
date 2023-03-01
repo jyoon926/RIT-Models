@@ -4,6 +4,7 @@ const _ = require('underscore');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const db = require('../config/db');
+const bcrypt = require('bcrypt');
 
 // Inserting User CREATE
 router.post('/register', async (req, res, next) => {
@@ -41,7 +42,7 @@ router.get('/:name', async (req, res) => {
     });
 });
 
-// Login
+// Login, returns a token
 router.post('/login', async (req, res, next) => {
     // Email and password are required for logging in
     if (!req.body.email || !req.body.password) {

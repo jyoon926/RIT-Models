@@ -158,6 +158,7 @@ export class ProfileComponent implements OnInit {
             "firstname": form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
             "lastname": form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
             "fullname": form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
+            "public": form.public as boolean,
             "gender": form.gender,
             "race": form.race,
             "height": form.height as number,
@@ -172,6 +173,7 @@ export class ProfileComponent implements OnInit {
             "headshot": this.headshotName ? this.headshotName : this.user?.headshot,
             "bodyshot": this.bodyshotName ? this.bodyshotName : this.user?.bodyshot
         };
+        
         this.userService.updateUser(user as unknown as User).subscribe({
             next: (event: any) => {
                 location.reload();
@@ -182,13 +184,12 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    togglePublic(user: User): void {
-        user.public = !user.public;
+    togglePublic(user: User, event: Event): void {
+        event.stopPropagation();
+        // user.public = false;
+        console.log(user.ispublic);
+        
         this.userService.updateUser(user).subscribe({
-            next: (event: any) => {
-                console.log("User is now " + (event.public?"public":"private"));
-                
-            }
         });
     }
 }

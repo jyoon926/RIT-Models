@@ -6,7 +6,7 @@ export interface User {
     lastname: string;
     fullname: string;
     isadmin: boolean;
-    public: boolean;
+    ispublic: boolean;
     gender: string;
     race: string;
     height: number;
