@@ -97,6 +97,13 @@ form {
                 padding: 12px;
                 max-width: 400px;
             }
+            .note {
+                max-width: 400px;
+                opacity: 0.6;
+                margin-bottom: 10px;
+                line-height: 1.25;
+                font-style: italic;
+            }
         }
     }
     .flow {

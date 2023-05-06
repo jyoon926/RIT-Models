@@ -13,6 +13,22 @@ export class ModelsComponent implements OnInit {
     users: User[] = [];
     images = new Map<string, any>();
     displayedUsers: User[] = [];
+
+    // Filters
+    men = true;
+    women = true;
+    nonbinary = true;
+    othergender = true;
+    heightF = 48;
+    heightT = 90;
+    waistF = 20;
+    waistT = 50;
+    hipF = 20;
+    hipT = 60;
+    chestF = 20;
+    chestT = 60;
+    shoeF = 4;
+    shoeT = 15;
     
     constructor(
         private userService: UserService,
@@ -131,26 +147,54 @@ export class ModelsComponent implements OnInit {
 
     addUserToDisplayed(user: User) {
         // Gender
-        if (user.gender == "Man" && !(<HTMLInputElement>document.getElementById("men")).checked) return;
-        if (user.gender == "Woman" && !(<HTMLInputElement>document.getElementById("women")).checked) return;
-        if (user.gender == "Non-binary/non-conforming" && !(<HTMLInputElement>document.getElementById("non-binary")).checked) return;
-        if (user.gender == "Other" && !(<HTMLInputElement>document.getElementById("other-gender")).checked) return;
+        if (user.gender == "Man" && !this.men) return;
+        if (user.gender == "Woman" && !this.women) return;
+        if (user.gender == "Non-binary/non-conforming" && !this.nonbinary) return;
+        if ((user.gender == "Other" || user.gender == "N/A") && !this.othergender) return;
         // Height
-        if (user.height > parseInt((<HTMLInputElement>document.getElementById("heightTo")).value)) return;
-        if (user.height < parseInt((<HTMLInputElement>document.getElementById("heightFrom")).value)) return;
+        if (user.height == null) {
+            if (this.heightT != 90 || this.heightF != 48) return;
+        } else {
+            if (user.height > this.heightT) return;
+            if (user.height < this.heightF) return;
+        }
         // Waist
-        if (user.waist > parseInt((<HTMLInputElement>document.getElementById("waistTo")).value)) return;
-        if (user.waist < parseInt((<HTMLInputElement>document.getElementById("waistFrom")).value)) return;
+        if (user.waist == null) {
+            if (this.waistT != 50 || this.waistF != 20) return;
+        } else {
+            if (user.waist > this.waistT) return;
+            if (user.waist < this.waistF) return;
+        }
         // Hip
-        if (user.hip > parseInt((<HTMLInputElement>document.getElementById("hipTo")).value)) return;
-        if (user.hip < parseInt((<HTMLInputElement>document.getElementById("hipFrom")).value)) return;
+        if (user.hip == null) {
+            if (this.hipT != 60 || this.hipF != 20) return;
+        } else {
+            if (user.hip > this.hipT) return;
+            if (user.hip < this.hipF) return;
+        }
         // Chest
-        if (user.chest > parseInt((<HTMLInputElement>document.getElementById("chestTo")).value)) return;
-        if (user.chest < parseInt((<HTMLInputElement>document.getElementById("chestFrom")).value)) return;
+        if (user.chest == null) {
+            if (this.chestT != 60 || this.chestF != 20) return;
+        } else {
+            if (user.chest > this.chestT) return;
+            if (user.chest < this.chestF) return;
+        }
         // Shoe
-        if (user.shoe > parseInt((<HTMLInputElement>document.getElementById("shoeTo")).value)) return;
-        if (user.shoe < parseInt((<HTMLInputElement>document.getElementById("shoeFrom")).value)) return;
+        if (user.shoe == null) {
+            if (this.shoeT != 15 || this.shoeF != 4) return;
+        } else {
+            if (user.shoe > this.shoeT) return;
+            if (user.shoe < this.shoeF) return;
+        }
         // Hair
+        if (user.hair == "N/A") {
+            let checkboxes = document.getElementsByClassName("hair");
+            let blank = true;
+            for (var i = 0; i < checkboxes.length; i++)
+                if (!(checkboxes[i] as HTMLInputElement).checked)
+                    blank = false;
+            if (!blank) return;
+        }
         if (user.hair == "Black" && !(<HTMLInputElement>document.getElementById("hair-black")).checked) return;
         if (user.hair == "Brown" && !(<HTMLInputElement>document.getElementById("hair-brown")).checked) return;
         if (user.hair == "Blue" && !(<HTMLInputElement>document.getElementById("hair-blue")).checked) return;
@@ -161,6 +205,14 @@ export class ModelsComponent implements OnInit {
         if (user.hair == "Amber" && !(<HTMLInputElement>document.getElementById("hair-amber")).checked) return;
         if (user.hair == "Other" && !(<HTMLInputElement>document.getElementById("hair-other")).checked) return;
         // Eyes
+        if (user.eyes == "N/A") {
+            let checkboxes = document.getElementsByClassName("eyes");
+            let blank = true;
+            for (var i = 0; i < checkboxes.length; i++)
+                if (!(checkboxes[i] as HTMLInputElement).checked)
+                    blank = false;
+            if (!blank) return;
+        }
         if (user.eyes == "Black" && !(<HTMLInputElement>document.getElementById("eyes-black")).checked) return;
         if (user.eyes == "Brown" && !(<HTMLInputElement>document.getElementById("eyes-brown")).checked) return;
         if (user.eyes == "Blonde" && !(<HTMLInputElement>document.getElementById("eyes-blonde")).checked) return;

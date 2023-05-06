@@ -188,8 +188,8 @@ header {
             .sign-up, .profile {
                 margin-top: 4vw;
                 padding: 20px 28px;
-                border: 1px solid $dark;
-                border-bottom: 1px solid rgba($dark, 1) !important;
+                border: none;
+                // border-bottom: 1px solid rgba($dark, 1) !important;
                 transition-duration: .4s;
                 display: flex;
                 flex-direction: column;
@@ -248,5 +248,22 @@ header {
     }
     #cursor {
         display: none;
+    }
+}
+
+#page-overlay {
+    transition: top 1s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #dbd8d0;
+    z-index: 1000;
+    &.down {
+        top: 0;
+    }
+    &.up {
+        top: -100vh;
     }
 }

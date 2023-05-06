@@ -5,7 +5,7 @@
     h1 {
         font-size: max(6rem, 10vw);
         font-family: big-caslon-fb, serif;
-        margin-bottom: 40px;
+        margin-bottom: 80px;
         border-bottom: 1px solid rgba($dark, 0.3);
         font-weight: normal;
     }
@@ -13,8 +13,9 @@
         font-style: normal;
     }
     .descr {
-        margin-bottom: 40px;
+        margin-bottom: 80px;
         opacity: .6;
+        font-size: 1.5em;
     }
     #register {
         span {
@@ -70,6 +71,13 @@
                 }
                 textarea {
                     max-width: 400px;
+                }
+                .note {
+                    max-width: 400px;
+                    opacity: 0.6;
+                    margin-bottom: 6px;
+                    line-height: 1.25;
+                    font-style: italic;
                 }
             }
         }
@@ -144,6 +152,12 @@
             font-style: italic;
             margin-top: -20px;
         }
+        p {
+            line-height: 1.25;
+            font-style: italic;
+            max-width: 400px;
+            margin-bottom: 6px;
+        }
     }
 }
 
@@ -158,6 +172,9 @@
                 flex-direction: column;
                 .basic {
                     max-width: 100%;
+                    #password {
+                        max-width: 400px;
+                    }
                 }
             }
             button {
