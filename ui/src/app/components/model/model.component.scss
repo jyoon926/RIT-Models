@@ -70,9 +70,13 @@ h1 {
             flex-direction: row;
             justify-content: space-between;
             align-items: flex-start;
-            padding-bottom: 6px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba($dark, 0.15);
             .category {
                 font-weight: bold;
+            }
+            &:last-child {
+                border-bottom: none;
             }
         }
         .links {
