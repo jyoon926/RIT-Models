@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/services/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-register',
@@ -22,12 +23,17 @@ export class RegisterComponent {
         private imageService: ImageService,
         private router: Router) { }
 
-    register(form: any): void {        
+    register(form: any): void {
         if (!/^([a-zA-Z0-9_\-\.]+)@rit.edu$/.test(form.email))
-            return;
+        // if (!emailValidator.validate(form.email))
+            return
+
+        const salt = bcrypt.genSaltSync(10);
+        let pw = bcrypt.hashSync(form.password, 10);
+
         let user = {
             "email": form.email.trim(),
-            "password": form.password,
+            "password": pw,
             "firstname": form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
             "lastname": form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
             "fullname": form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
@@ -47,7 +53,7 @@ export class RegisterComponent {
             "bodyshot": this.bodyshotName? this.bodyshotName : ""
         };
         this.userService.register(user as unknown as User).subscribe(() => {
-            this.authService.logIn(user.email, user.password).subscribe(res => {
+            this.authService.logIn(user.email, form.password).subscribe(res => {
                 this.router.navigate(['/profile']);
             }, err => {
                 alert("There was an unexpected error while registering.");
@@ -99,20 +105,19 @@ export class RegisterComponent {
     }
     
     selectHeadshot(event: any): void {
-        if(event.target.files[0].size > 5000000) {
-            console.log("no");
+        if(event.target.files[0].size > 10000000) {
             event.target.value = "";
-            alert("File cannot exceed 5MB.");
+            alert("File cannot exceed 10MB.");
         } else {
             this.headshot = event.target.files;
         }
     }
     
     selectBodyshot(event: any): void {
-        if(event.target.files[0].size > 5000000) {
+        if(event.target.files[0].size > 10000000) {
             console.log("no");
             event.target.value = "";
-            alert("File cannot exceed 5MB.");
+            alert("File cannot exceed 10MB.");
         } else {
             this.bodyshot = event.target.files;
         }

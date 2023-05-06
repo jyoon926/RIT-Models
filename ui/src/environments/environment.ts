@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    serverUrl: 'https://modelsatrit.com/api'
+    serverUrl: 'http://localhost:3000/api'
 }

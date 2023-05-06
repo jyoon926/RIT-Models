@@ -14,10 +14,7 @@ export class ImageService {
 
     upload(file: File) {
         const formData: FormData = new FormData();
-
         formData.append('file', file);
-        console.log("upload");
-        
         return this.http.post<File>(`${this.imageUrl}uploadfile`, formData).pipe(tap((message) => 
             {console.log(message);}, (error) => {console.log(error);
             }

@@ -33,8 +33,8 @@ header {
         align-items: center;
         gap: 30px;
         a {
-            padding: 3px;
-            &:not(.sign-up) {
+            padding: 3px 1px;
+            &:not(.sign-up):not(.profile) {
                 border-bottom: 1px solid rgba($dark, 0);
                 transition-duration: .4s;
                 &:hover {
@@ -44,42 +44,42 @@ header {
         }
         .sign-up, .profile {
             padding: 14px 28px;
-            background: rgba($dark, 1);
-            color: $light;
-            border: 1px solid $dark;
-            border-bottom: 1px solid rgba($dark, 1) !important;
+            background: rgba($dark, 0.15);
+            color: $dark;
+            // border: 2px solid rgba($dark, 0.3);
+            // border-bottom: 2px solid rgba($dark, 1) !important;
             transition-duration: .4s;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             line-height: 0.8;
-            &::before, &::after {
-                padding: 14px 28px;
-                content: "Become a model";
-                position: absolute;
-                color: rgba($dark, 0);
-                border: 1px solid rgba($dark, 0);
-                transition-duration: .4s;
-                z-index: -1;
-            }
+            // &::before, &::after {
+            //     padding: 14px 28px;
+            //     content: "Become a model";
+            //     position: absolute;
+            //     color: rgba($dark, 0);
+            //     border: 1px solid rgba($dark, 0);
+            //     transition-duration: .4s;
+            //     z-index: -1;
+            //     border-radius: 10px;
+            // }
             &:hover {
-                border: 1px solid rgba($dark, 1);
-                background: rgba($dark, 0);
-                color: $dark;
-                &::before {
-                    transform: translate(4px, -4px);
-                    border: 1px solid rgba($dark, 1);
-                }
-                &::after {
-                    transform: translate(-4px, 4px);
-                    border: 1px solid rgba($dark, 1);
-                }
+                background: rgba($dark, 1);
+                color: $light;
+                // &::before {
+                //     transform: translate(4px, -4px);
+                //     border: 1px solid rgba($dark, 1);
+                // }
+                // &::after {
+                //     transform: translate(-4px, 4px);
+                //     border: 1px solid rgba($dark, 1);
+                // }
             }
         }
-        .profile::before, .profile::after {
-            content: "Your profile";
-        }
+        // .profile::before, .profile::after {
+        //     content: "Your profile";
+        // }
     }
     #menu-button, #checkbox {
         display: none;
@@ -181,13 +181,13 @@ header {
                     border-bottom: 1px solid rgba($dark, 0);
                     transition-duration: .4s;
                     &:hover {
-                        border-bottom: none;
+                        border-bottom: 0px;
                     }
                 }
             }
             .sign-up, .profile {
                 margin-top: 4vw;
-                padding: 14px 28px;
+                padding: 20px 28px;
                 border: 1px solid $dark;
                 border-bottom: 1px solid rgba($dark, 1) !important;
                 transition-duration: .4s;

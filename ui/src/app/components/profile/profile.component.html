@@ -1,15 +1,21 @@
 <section>
     <h1>Model Profile</h1>
+    <p *ngIf="!user" style="margin-bottom: 14px;">You aren't logged in!</p>
+    <button (click)="logOut()" class="logout" *ngIf="!user">Log in</button>
 
     <form autocomplete="off" #form="ngForm" (ngSubmit)="upload(form.value)" [noValidate]="false" *ngIf="user">
         <div class="buttons">
             <button routerLink='/models/{{user.fullname}}'>View public profile</button>
             <button (click)="logOut()" class="logout">Log out</button>
         </div>
+        
+        <button id="save" type='submit'>Save changes</button>
 
         <div class="row">
             <div class="basic list">
                 <h3><em>Account Info</em></h3>
+        
+                <label for="public" class="public"><input id="public" type="checkbox" name="public" [(ngModel)]="user.ispublic" style="margin-right: 6px" (change)="togglePublic(user, $event, form.value)"/>Public profile</label>
 
                 <label for="firstname">First Name<span>*</span></label>
                 <input id="firstname" type="text" name="firstname" required [(ngModel)]="user.firstname" />
@@ -20,17 +26,15 @@
                 <label for="email">Email<span>*</span><b> (must be rit.edu)</b></label>
                 <input id="email" type="text" name="email" required [(ngModel)]="user.email" pattern="^([a-zA-Z0-9_\-\.]+)@rit.edu$"/>
         
-                <label for="password">Password<span>*</span></label>
-                <input id="password" type="password" autocomplete="off" name="password" required [(ngModel)]="user.password" />
-        
-                <label for="public"><input id="public" type="checkbox" name="public" [(ngModel)]="user.ispublic" style="margin-right: 6px;"/>Public profile</label>
+                <label for="password">Set a new password</label>
+                <input id="password" type="password" autocomplete="off" name="password" ngModel />
             </div>
 
             <div class="personal list">
                 <h3><em>Model Info</em></h3>
 
-                <label for="gender">Gender<span>*</span></label>
-                <select name="gender" id="gender" [(ngModel)]="user.gender" required>
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender" [(ngModel)]="user.gender">
                     <option value="Man">Man</option>
                     <option value="Woman">Woman</option>
                     <option value="Non-binary/non-conforming">Non-binary/non-conforming</option>
@@ -38,8 +42,8 @@
                     <option value="N/A">Prefer not to say</option>
                 </select>
 
-                <label for="race">Race<span>*</span><b> (select multiple with the ctrl or cmd key)</b></label>
-                <select name="race" id="race" [(ngModel)]="user.race" multiple required>
+                <label for="race">Race<b> (select multiple with the ctrl or cmd key)</b></label>
+                <select name="race" id="race" [(ngModel)]="user.race" multiple>
                     <option value="Black or African American">Black or African American</option>
                     <option value="Asian">Asian</option>
                     <option value="Hispanic or Latino">Hispanic or Latino</option>
@@ -51,24 +55,24 @@
                 </select>
 
                 <div class="small">
-                    <label for="height">Height<span>*</span><b> (in)</b></label>
-                    <input id="height" type="number" required name="height" [(ngModel)]="user.height" (keydown)="keydown($event)" />
+                    <label for="height">Height<b> (in)</b></label>
+                    <input id="height" type="number" name="height" [(ngModel)]="user.height" (keydown)="keydown($event)" />
                 </div>
                 <div class="small">
                     <label for="waist">Waist <b>(in)</b></label>
-                    <input id="waist" type="number" name="waist" [(ngModel)]="user.waist" required (keydown)="keydown($event)" />
+                    <input id="waist" type="number" name="waist" [(ngModel)]="user.waist" (keydown)="keydown($event)" />
                 </div>
                 <div class="small">
                     <label for="hip">Hip <b>(in)</b></label>
-                    <input id="hip" type="number" name="hip" [(ngModel)]="user.hip" required (keydown)="keydown($event)" />
+                    <input id="hip" type="number" name="hip" [(ngModel)]="user.hip" (keydown)="keydown($event)" />
                 </div>
                 <div class="small">
                     <label for="chest">Chest <b>(in)</b></label>
-                    <input id="chest" type="number" name="chest" [(ngModel)]="user.chest" required (keydown)="keydown($event)" />
+                    <input id="chest" type="number" name="chest" [(ngModel)]="user.chest" (keydown)="keydown($event)" />
                 </div>
                 <div class="small">
                     <label for="eyes">Eyes</label>
-                    <select name="eyes" id="eyes" [(ngModel)]="user.eyes" required>
+                    <select name="eyes" id="eyes" [(ngModel)]="user.eyes">
                         <option value="Brown">Brown</option>
                         <option value="Blue">Blue</option>
                         <option value="Hazel">Hazel</option>
@@ -86,7 +90,7 @@
                 </div>
                 <div class="small">
                     <label for="hair">Hair</label>
-                    <select name="hair" id="hair" [(ngModel)]="user.hair" required>
+                    <select name="hair" id="hair" [(ngModel)]="user.hair">
                         <option value="Black">Black</option>
                         <option value="Brown">Brown</option>
                         <option value="Blonde">Blonde</option>
@@ -115,8 +119,6 @@
                 <label for="bodyshot">Body Shot<span>*</span></label>
                 <img src="{{getImage(user.bodyshot)}}" alt="">
                 <input id="bodyshot" type="file" name="bodyshot" ngModel style="width: 250px;" (change)="selectBodyshot($event)" />
-
-                <button id="save" type='submit'>Save changes</button>
             </div>
         </div>
     </form>

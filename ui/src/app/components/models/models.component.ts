@@ -33,7 +33,7 @@ export class ModelsComponent implements OnInit {
                     return 1;
                 } return 0;
             });
-            this.displayedUsers = this.users;
+            this.displayedUsers = this.users.filter((value) => value.ispublic);
             this.getImages();
         });
     }

@@ -1,7 +1,7 @@
 @import '../../../styles';
 
 section {
-    padding: 200px 40px;
+    padding: 200px 40px 300px 40px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -9,16 +9,16 @@ section {
 }
 h1 {
     width: 100%;
-    font-size: 6rem;
+    font-size: max(6rem, 12vw);
     font-family: big-caslon-fb, serif;
-    margin-bottom: 80px;
+    margin-bottom: 10vh;
     border-bottom: 1px solid rgba($dark, 0.3);
     font-weight: normal;
 }
 h3 {
     font-size: 2.5rem;
     font-family: big-caslon-fb, serif;
-    margin-bottom: 80px;
+    margin-bottom: 10vh;
     font-weight: normal;
     line-height: 1.15;
     width: 50%;
@@ -42,8 +42,9 @@ h3 {
     // max-width: 1200px;
     width: fit-content;
     img {
-        max-width: 400px;
+        max-width: 600px;
         mix-blend-mode: multiply;
+        filter: grayscale(1);
     }
     p {
         font-size: 1.25rem;
@@ -51,7 +52,7 @@ h3 {
         max-width: 700px;
         line-height: 1.25;
         b {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-family: big-caslon-fb, serif;
             font-weight: normal;
         }
@@ -68,12 +69,12 @@ h3 {
         }
         a {
             font-size: 1rem;
-            background: $dark;
-            color: $light;
-            padding: 12px 24px;
+            background: rgba($dark, 0.1);
+            color: $dark;
+            padding: 14px 24px;
             transition-duration: .3s;
             &:hover {
-                opacity: .6;
+                background: rgba($dark, 0.25);
             }
         }
     }
@@ -87,7 +88,7 @@ h3 {
         font-size: 2rem;
         width: 100%;
         padding-left: 14px;
-        border-left: 1px solid rgba($dark, 0.3);
+        border-left: 2px solid rgba($dark, 0.3);
         margin-bottom: 60px;
     }
     .right {
@@ -99,7 +100,7 @@ h3 {
         gap: 40px;
         img {
             width: 100%;
-            mix-blend-mode: multiply;
+            border-radius: 12px;
         }
         p {
             font-size: 1rem;

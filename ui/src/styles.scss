@@ -1,12 +1,24 @@
 $dark: #000;
-$light: #fff;
+$light: #e4e1d9;
 
 @font-face {
     font-family: 'Radio Grotesk';
     src: url('./assets/fonts/PPRadioGrotesk/PPRadioGrotesk-Regular.otf');
 }
+@font-face {
+    font-family: 'Plain';
+    src: url(assets/fonts/Plain/Plain-Bold.woff) format("woff");
+    font-weight: 700;
+    font-style: normal
+}
+@font-face {
+    font-family: 'Plain';
+    src: url(assets/fonts/Plain/Plain-Regular.woff) format("woff");
+    font-weight: 400;
+    font-style: normal
+}
 * {
-    font-family: 'Radio Grotesk', sans-serif;
+    font-family: 'Plain', sans-serif;
     margin: 0;
     padding: 0;
     color: $dark;
@@ -14,9 +26,14 @@ $light: #fff;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -.01rem;
+}
+::selection {
+    color: $light;
+    background-color: rgba($dark, 0.75);
 }
 html {
-    font-size: 15px;
+    font-size: 16px;
     scroll-behavior: smooth;
     background: $light;
     overflow-x: hidden;
@@ -28,7 +45,7 @@ a {
     text-decoration: none;
 }
 .italic, em {
-    font-family: big-caslon-fb, serif;
+    font-family: 'big-caslon-fb', serif;
     font-weight: 400;
     font-style: italic;
 }
@@ -44,51 +61,67 @@ h3 {
 input:not([type=checkbox]):not([type=range]) {
     all: unset;
     font-size: 1rem;
-    padding: 4px 6px;
+    padding: 6px 10px;
     box-sizing: border-box;
-    border: 1px solid rgba($dark, 0.3);
+    border: 2px solid rgba($dark, 0);
     transition-duration: .3s;
-    background: $light;
+    // border-radius: 12px;
+    background: rgba($dark, 0.1);
+    &:hover {
+        border: 2px solid rgba($dark, 0.3);
+    }
     &:focus {
-        border: 1px solid $dark;
+        border: 2px solid rgba($dark, 1);
     }
     &:required {
         background: rgba(red, 0.075);
     }
     &:valid {
-        background: $light;
+        background: rgba($dark, 0.1);
     }
 }
 select {
     font-size: 1rem;
-    padding: 4px 6px;
+    padding: 6px 10px;
     box-sizing: border-box;
-    border: 1px solid rgba($dark, 0.3);
-    background: $light;
+    border: 2px solid rgba($dark, 0);
+    // border-radius: 12px;
+    background: rgba($dark, 0.1);
+    transition-duration: .3s;
     &:required {
         background: rgba(red, 0.075);
     }
     &:valid {
-        background: $light;
+        background: rgba($dark, 0.1);
+    }
+    &:hover {
+        border: 2px solid rgba($dark, 0.3);
     }
 }
 textarea {
-    padding: 4px 6px;
-    border: 1px solid rgba($dark, 0.3);
+    padding: 6px 10px;
+    background: rgba($dark, 0.1);
     line-height: 1.5;
     resize: none;
     font-size: 1rem;
-    background: $light;
+    border: 2px solid rgba($dark, 0);
+    transition-duration: .3s;
+    // border-radius: 12px;
+    &:hover {
+        border: 2px solid rgba($dark, 0.3);
+    }
 }
 button {
     all: unset;
-    background: $dark;
-    color: $light;
-    padding: 12px 24px;
+    background: rgba($dark, 0.1);
+    color: $dark;
+    padding: 14px 24px;
     box-sizing: border-box;
     transition-duration: .3s;
+    // border-radius: 12px;
     &:hover {
-        opacity: .6;
+        background: rgba($dark, 1);
+        color: $light;
         cursor: pointer;
     }
 }

@@ -61,7 +61,7 @@ const UserSchema = new Scheme({
     eyes: {
         type: String,
         enum: ['Brown', 'Blue', 'Hazel', 'Green', 'Gray', 'Black', 'Red', 'Amber', 'Other', 'N/A'],
-        default: 'N/A'
+        default: null
     },
     shoe: {
         type: Number,
@@ -69,7 +69,7 @@ const UserSchema = new Scheme({
     },
     hair: {
         type: String,
-        default: 'N/A'
+        default: null
     },
     bio: {
         type: String,

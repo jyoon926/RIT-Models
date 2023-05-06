@@ -5,6 +5,8 @@ import { UserService } from 'src/app/services/user.service';
 import { Location } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
+import * as bcrypt from 'bcryptjs';
+import { STRING_TYPE } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile',
@@ -135,52 +137,57 @@ export class ProfileComponent implements OnInit {
     }
     
     selectHeadshot(event: any): void {
-        if(event.target.files[0].size > 5000000) {
+        if(event.target.files[0].size > 10000000) {
             console.log("no");
             event.target.value = "";
-            alert("File cannot exceed 5MB.");
+            alert("File cannot exceed 10MB.");
         } else {
             this.headshot = event.target.files;
         }
     }
     
     selectBodyshot(event: any): void {
-        if(event.target.files[0].size > 5000000) {
+        if(event.target.files[0].size > 10000000) {
             console.log("no");
             event.target.value = "";
-            alert("File cannot exceed 5MB.");
+            alert("File cannot exceed 10MB.");
         } else {
             this.bodyshot = event.target.files;
         }
     }
 
     update(form: any): void {
-        let user = {
-            "_id": this.user?._id,
-            "email": form.email.trim(),
-            "password": form.password,
-            "firstname": form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
-            "lastname": form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
-            "fullname": form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
-            "ispublic": form.public,
-            "gender": form.gender,
-            "race": form.race,
-            "height": form.height as number,
-            "waist": form.waist,
-            "hip": form.hip,
-            "chest": form.chest,
-            "eyes": form.eyes,
-            "shoe": form.shoe,
-            "hair": form.hair,
-            "bio": form.bio.trim(),
-            "instagram": form.instagram.trim(),
-            "headshot": this.headshotName ? this.headshotName : this.user?.headshot,
-            "bodyshot": this.bodyshotName ? this.bodyshotName : this.user?.bodyshot
+        let user: any = {
+            _id: this.user?._id,
+            email: form.email.trim(),
+            firstname: form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
+            lastname: form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
+            fullname: form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
+            ispublic: form.public,
+            gender: form.gender,
+            race: form.race,
+            height: form.height as number,
+            waist: form.waist,
+            hip: form.hip,
+            chest: form.chest,
+            eyes: form.eyes,
+            shoe: form.shoe,
+            hair: form.hair,
+            bio: form.bio.trim(),
+            instagram: form.instagram.trim(),
+            headshot: this.headshotName ? this.headshotName : this.user?.headshot,
+            bodyshot: this.bodyshotName ? this.bodyshotName : this.user?.bodyshot
         };
-        console.log(user.ispublic);
-        
+        if (form.password != "") {
+            console.log(form.password);
+            
+            let pw = bcrypt.hashSync(form.password, 10);
+            user.password = pw;
+        }
         this.userService.updateUser(user as unknown as User).subscribe({
             next: (event: any) => {
+                localStorage.setItem('api_auth_id', user.fullname);
+                this.userService.setLoggedInUser(user.fullname);
                 location.reload();
             },
             error: (err: any) => {
@@ -191,8 +198,8 @@ export class ProfileComponent implements OnInit {
 
     togglePublic(user: User, event: Event, form: any): void {
         event.stopPropagation();
-        this.update(form);
-        // console.log(user.ispublic);
+        // this.update(form);
+        console.log(user.ispublic);
         // user.ispublic = true;
         // console.log(user.ispublic);
         

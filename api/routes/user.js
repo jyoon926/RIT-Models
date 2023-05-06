@@ -49,10 +49,10 @@ router.post('/login', async (req, res, next) => {
         next(new Error(`Email or password is missing in body request: ${JSON.stringify(req.body)}`));
         return;
     }
-    User.findOne({email: req.body.email, password: req.body.password})
+    User.findOne({email: req.body.email})
     .then(
         (result) => {
-            if (result) {
+            if (result && bcrypt.compareSync(req.body.password, result.password)) {
                 const token = jwt.sign({ id: result._id }, 'secretkey');
                 res.json({"token": token, "name": result.fullname});
                 console.log("Logged in to " + result.fullname);
