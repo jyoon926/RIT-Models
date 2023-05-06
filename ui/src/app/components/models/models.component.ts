@@ -116,9 +116,9 @@ export class ModelsComponent implements OnInit {
     changeFrom(fromSlider: any, toSlider: any, display: any, type: number) {
         let from: number = parseInt((fromSlider as HTMLInputElement).value);
         let to: number = parseInt((toSlider as HTMLInputElement).value);
-        if (from > to) {
-            fromSlider.value = to;
-            from = to;
+        if (from >= to) {
+            fromSlider.value = to - 1;
+            from = to - 1;
         }
         if (type == 0)
             (display as HTMLElement).innerHTML = Math.floor(from / 12) + "' " + (from % 12) + "\"";
@@ -132,9 +132,9 @@ export class ModelsComponent implements OnInit {
     changeTo(fromSlider: any, toSlider: any, display: any, type: number) {
         let from: number = parseInt((fromSlider as HTMLInputElement).value);
         let to: number = parseInt((toSlider as HTMLInputElement).value);
-        if (from > to) {
-            toSlider.value = from;
-            to = from;
+        if (from >= to) {
+            toSlider.value = from + 1;
+            to = from + 1;
         }
         if (type == 0)
             (display as HTMLElement).innerHTML = Math.floor(to / 12) + "' " + (to % 12) + "\"";
