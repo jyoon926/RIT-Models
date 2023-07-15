@@ -6,91 +6,104 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-    users: User[] = [];
-    images = new Map<string, any>();
-    
-    constructor(
-        private userService: UserService,
-        private imageService: ImageService
-    ) {}
+  users: User[] = [];
+  images = new Map<string, any>();
 
-    ngOnInit(): void {
-        this.getUsers();
-    }
+  constructor(
+    private userService: UserService,
+    private imageService: ImageService,
+  ) {}
 
-    getUsers(): void {
-        this.userService.getUsers().subscribe(users => {
-            this.users = users;
-            // this.users.sort(() => Math.random() - 0.5);
-            this.getImages();
-        });
-    }
-
-    getImages(): void {
-        this.users.forEach(user => {
-            if (user.headshot)
-                this.getImageFromService(user.headshot);
-        });
-    }
-    
-    getImageFromService(filename: string) {
-        this.imageService.getImage(filename).subscribe(data => {
-            this.createImageFromBlob(data, filename);
-        }, error => {
-            console.log(error);
-        });
+  ngOnInit(): void {
+    this.getUsers();
   }
 
-    createImageFromBlob(image: Blob, filename: string) {
-        let reader = new FileReader();
-        reader.addEventListener("load", () => {
-           this.images.set(filename, reader.result);
-        }, false);
-        if (image) {
-           reader.readAsDataURL(image);
+  getUsers(): void {
+    this.userService.getUsers().subscribe((users) => {
+      users.sort((a, b) => {
+        if (a.firstname < b.firstname) {
+          return -1;
+        } else if (a.firstname > b.firstname) {
+          return 1;
         }
-    }
+        return 0;
+      });
+      this.users = users.filter((value) => value.ispublic);
+      this.getImages();
+    });
+  }
 
-    getImage(filename:string): string {
-        if (filename && this.images.has(filename))
-            return this.images.get(filename);
-        return "";
-    }
+  getImages(): void {
+    this.users.forEach((user) => {
+      if (user.headshot) this.getImageFromService(user.headshot);
+    });
+  }
 
-    random(): number {
-        return Math.random() * 80 - 40;
+  getImageFromService(filename: string) {
+    this.imageService.getImage(filename).subscribe(
+      (data) => {
+        this.createImageFromBlob(data, filename);
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+  }
+
+  createImageFromBlob(image: Blob, filename: string) {
+    let reader = new FileReader();
+    reader.addEventListener(
+      'load',
+      () => {
+        this.images.set(filename, reader.result);
+      },
+      false,
+    );
+    if (image) {
+      reader.readAsDataURL(image);
     }
+  }
+
+  getImage(filename: string): string {
+    if (filename && this.images.has(filename)) return this.images.get(filename);
+    return '';
+  }
+
+  random(): number {
+    return Math.random() * 80 - 40;
+  }
 }
 
-const images = document.getElementsByClassName("model-image");
-let globalIndex = 0, last = { x: 0, y: 0 };
+const images = document.getElementsByClassName('model-image');
+let globalIndex = 0,
+  last = { x: 0, y: 0 };
 const activate = (image: HTMLElement, x: number, y: number) => {
-    if (image) {
-        image.style.left = `${x}px`;
-        image.style.top = `${y}px`;
-        image.style.zIndex = "" + globalIndex;
-        image.classList.add("active");
-        last = {x,y};
-    }
-}
+  if (image) {
+    image.style.left = `${x}px`;
+    image.style.top = `${y}px`;
+    image.style.zIndex = '' + globalIndex;
+    image.classList.add('active');
+    last = { x, y };
+  }
+};
 const deactivate = (image: HTMLElement) => {
-    if (image) {
-        image.classList.remove("active");
-    }
-}
+  if (image) {
+    image.classList.remove('active');
+  }
+};
 const distanceFromLast = (x: number, y: number) => {
-    return Math.hypot(x - last.x, y - last.y);
-}
-window.onmousemove = e => {
-    if (distanceFromLast(e.clientX, e.clientY) > (window.innerWidth / 25)) {
-        const lead = images[globalIndex % images.length],
-                tail = images[(globalIndex - Math.min(12, images.length - 1)) % images.length];
-        activate(lead as HTMLElement, e.clientX, e.clientY);
-        deactivate(tail as HTMLElement);
-        
-        globalIndex++;
-    }
-}
+  return Math.hypot(x - last.x, y - last.y);
+};
+window.onmousemove = (e) => {
+  if (distanceFromLast(e.clientX, e.clientY) > window.innerWidth / 25) {
+    const lead = images[globalIndex % images.length],
+      tail = images[(globalIndex - Math.min(12, images.length - 1)) % images.length];
+    activate(lead as HTMLElement, e.clientX, e.clientY);
+    deactivate(tail as HTMLElement);
+
+    globalIndex++;
+  }
+};

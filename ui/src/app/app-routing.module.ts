@@ -10,17 +10,17 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ModelComponent } from './components/model/model.component';
 
 const routes: Routes = [
-    { path: 'models/:name', component: ModelComponent },
-    { path: 'models', component: ModelsComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: '', component: HomeComponent }
+  { path: 'models/:username', component: ModelComponent },
+  { path: 'models', component: ModelsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

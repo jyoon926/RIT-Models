@@ -1,204 +1,205 @@
-@import '../../../styles';
+@import "../../../styles";
 
 section {
-    padding: 200px 40px;
+  padding: 200px 40px;
 }
 h1 {
-    font-size: max(6rem, 12vw);
-    font-family: big-caslon-fb, serif;
-    margin-bottom: 40px;
-    border-bottom: 1px solid rgba($dark, 0.3);
-    font-weight: normal;
+  font-size: max(6rem, 12vw);
+  font-family: big-caslon-fb, serif;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba($dark, 0.3);
+  font-weight: normal;
 }
 form {
-    .buttons {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-bottom: 20px;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 20px;
+  }
+  span {
+    color: rgb(192, 0, 0);
+    padding-left: 2px;
+  }
+  em {
+    font-style: normal;
+  }
+  label {
+    width: fit-content;
+  }
+  #save {
+    background: rgba($dark, 1);
+    color: $light;
+    padding: 20px 30px;
+    font-size: 1.5em;
+    font-family: "big-caslon-fb", serif;
+    margin-bottom: 40px;
+    &:hover {
+      opacity: 0.6;
     }
-    span {
-        color: rgb(192, 0, 0);
-        padding-left: 2px;
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    gap: 40px;
+    .basic {
+      max-width: 300px;
     }
-    em {
-        font-style: normal;
-    }
-    label {
-        width: fit-content;
-    }
-    #save {
-        background: rgba($dark, 1);
-        color: $light;
-        padding: 20px 30px;
-        font-size: 1.5em;
-        font-family: 'big-caslon-fb', serif;
-        margin-bottom: 40px;
-        &:hover {
-            opacity: 0.6;
-        }
-    }
-    .row {
-        display: flex;
-        flex-direction: row;
-        flex-grow: 1;
-        gap: 40px;
-        .basic {
-            max-width: 300px;
-        }
-        .list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            label b {
-                font-weight: normal;
-                opacity: .6;
-                font-style: italic;
-                font-size: .9rem;
-            }
-            p, label {
-                margin-bottom: -14px;
-            }
-            select {
-                max-width: 400px;
-            }
-            .checklist {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 6px;
-                input {
-                    margin-right: 6px;
-                }
-                label {
-                    padding: 4px 6px;
-                    border: 1px solid rgba($dark, 0.3);
-                }
-            }
-            input[type=number] {
-                max-width: 100px;
-            }
-            input[type=text] {
-                max-width: 400px;
-            }
-            textarea {
-                max-width: 400px;
-            }
-            img {
-                width: 150px;
-                margin-bottom: -14px;
-            }
-            .public {
-                border: 1px solid rgba($dark, 0.3);
-                margin-bottom: 10px;
-                width: 100%;
-                padding: 12px;
-                max-width: 400px;
-            }
-            .note {
-                max-width: 400px;
-                opacity: 0.6;
-                margin-bottom: 10px;
-                line-height: 1.25;
-                font-style: italic;
-            }
-        }
-    }
-    .flow {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 40px;
-    }
-    .small {
-        label {
-            margin-right: 10px;
-        }
-    }
-    .bio {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        max-width: 640px;
-    }
-    .ig {
-        .at {
-            position: absolute;
-            margin: 10.5px 0 0 5px;
-            z-index: 1;
-            opacity: 0.6;
-            color: $dark;
-        }
-        input {
-            padding-left: 20px;
-        }
-    }
-    #save {
-        margin-top: 20px;
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
-        // display: flex;
-        // flex-direction: column;
-        // justify-content: center;
-        // align-items: center;
-        // border: 1px solid $dark;
-        // background: $dark;
-        // color: $light;
-        // &::before, &::after {
-        //     width: calc(100% - 80px);
-        //     max-width: 300px;
-        //     padding: 12px 24px;
-        //     box-sizing: border-box;
-        //     content: "Register";
-        //     position: absolute;
-        //     color: rgba($dark, 0);
-        //     border: 1px solid rgba($dark, 1);
-        //     transition-duration: .4s;
-        //     z-index: -1;
-        // }
-        // &:hover {
-        //     opacity: 1;
-        //     background: none;
-        //     color: $dark;
-        //     &::before {
-        //         transform: translate(4px, -4px);
-        //     }
-        //     &::after {
-        //         transform: translate(-4px, 4px);
-        //     }
-        // }
-    }
-    a {
-        text-decoration: underline;
-    }
-    #failed {
-        opacity: 0;
-        font-size: .9rem;
-        color: $light;
-        background: red;
-        padding: 8px 12px;
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      label b {
+        font-weight: normal;
+        opacity: 0.6;
         font-style: italic;
-        margin-top: -20px;
+        font-size: 0.9rem;
+      }
+      p,
+      label {
+        margin-bottom: -14px;
+      }
+      select {
+        max-width: 400px;
+      }
+      .checklist {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+        input {
+          margin-right: 6px;
+        }
+        label {
+          padding: 4px 6px;
+          border: 1px solid rgba($dark, 0.3);
+        }
+      }
+      input[type="number"] {
+        max-width: 100px;
+      }
+      input[type="text"] {
+        max-width: 400px;
+      }
+      textarea {
+        max-width: 400px;
+      }
+      img {
+        width: 150px;
+        margin-bottom: -14px;
+      }
+      .public {
+        border: 1px solid rgba($dark, 0.3);
+        margin-bottom: 10px;
+        width: 100%;
+        padding: 12px;
+        max-width: 400px;
+      }
+      .note {
+        max-width: 400px;
+        opacity: 0.6;
+        margin-bottom: 10px;
+        line-height: 1.25;
+        font-style: italic;
+      }
     }
+  }
+  .flow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .small {
+    label {
+      margin-right: 10px;
+    }
+  }
+  .bio {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 640px;
+  }
+  .ig {
+    .at {
+      position: absolute;
+      margin: 10.5px 0 0 5px;
+      z-index: 1;
+      opacity: 0.6;
+      color: $dark;
+    }
+    input {
+      padding-left: 20px;
+    }
+  }
+  #save {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    // border: 1px solid $dark;
+    // background: $dark;
+    // color: $light;
+    // &::before, &::after {
+    //     width: calc(100% - 80px);
+    //     max-width: 300px;
+    //     padding: 12px 24px;
+    //     box-sizing: border-box;
+    //     content: "Register";
+    //     position: absolute;
+    //     color: rgba($dark, 0);
+    //     border: 1px solid rgba($dark, 1);
+    //     transition-duration: .4s;
+    //     z-index: -1;
+    // }
+    // &:hover {
+    //     opacity: 1;
+    //     background: none;
+    //     color: $dark;
+    //     &::before {
+    //         transform: translate(4px, -4px);
+    //     }
+    //     &::after {
+    //         transform: translate(-4px, 4px);
+    //     }
+    // }
+  }
+  a {
+    text-decoration: underline;
+  }
+  #failed {
+    opacity: 0;
+    font-size: 0.9rem;
+    color: $light;
+    background: red;
+    padding: 8px 12px;
+    font-style: italic;
+    margin-top: -20px;
+  }
 }
 @media screen and (max-width: 800px) {
-    section {
-        padding: 200px 20px;
-        h1 {
-            font-size: 4rem;
-        }
+  section {
+    padding: 200px 20px;
+    h1 {
+      font-size: 4rem;
     }
-    form .row {
-        flex-direction: column;
-        margin-bottom: 40px;
-        .basic {
-            max-width: 100%;
-            #password {
-                max-width: 400px;
-            }
-        }
+  }
+  form .row {
+    flex-direction: column;
+    margin-bottom: 40px;
+    .basic {
+      max-width: 100%;
+      #password {
+        max-width: 400px;
+      }
     }
+  }
 }

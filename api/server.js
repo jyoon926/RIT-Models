@@ -12,15 +12,15 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.json({msg: 'Hello world!'});
+    res.json('success');
 });
 
 app.get('/api', (req, res) => {
-    res.json({msg: 'Hello from the api!'});
+    res.json('api success');
 });
 
 // Adding other routes
-app.use('/api/user', require('./routes/user'));
+app.use('/api/users', require('./routes/user'));
 app.use('/api/images', require('./routes/image'));
 
 // Universal error handler

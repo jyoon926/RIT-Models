@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { FormsModule } from '@angular/forms';
 import { ModelComponent } from './components/model/model.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -26,15 +27,11 @@ import { ModelComponent } from './components/model/model.component';
     AboutComponent,
     RegisterComponent,
     ProfileComponent,
-    ModelComponent
+    ModelComponent,
+    HeaderComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [UserService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

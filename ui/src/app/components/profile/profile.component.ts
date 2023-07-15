@@ -11,199 +11,200 @@ import { STRING_TYPE } from '@angular/compiler';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-    headshot?: FileList;
-    bodyshot?: FileList;
-    headshotName?: string;
-    bodyshotName?: string;
-    user: User | undefined;
-    images = new Map<string, any>();
+  headshot?: FileList;
+  bodyshot?: FileList;
+  headshotName?: string;
+  bodyshotName?: string;
+  user: User | undefined;
+  images = new Map<string, any>();
 
-    constructor(
-        private route: ActivatedRoute,
-        private userService: UserService,
-        public authService: AuthService,
-        private imageService: ImageService,
-        private router: Router
-    ) {}
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    public authService: AuthService,
+    private imageService: ImageService,
+    private router: Router,
+  ) {}
 
-    ngOnInit(): void {
-        this.getUser();
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser(): void {
+    console.log(this.authService.getLoggedInUser());
+
+    this.userService.getUser(this.authService.getLoggedInUser()).subscribe((response) => {
+      this.user = response;
+      console.log(this.user.ispublic);
+
+      this.getImages();
+      if (response == null) this.router.navigate(['/login']);
+    });
+  }
+
+  getImages(): void {
+    if (this.user && this.user.headshot) this.getImageFromService(this.user.headshot);
+    if (this.user && this.user.bodyshot) this.getImageFromService(this.user.bodyshot);
+  }
+
+  getImageFromService(filename: string) {
+    this.imageService.getImage(filename).subscribe(
+      (data: Blob) => {
+        this.createImageFromBlob(data, filename);
+      },
+      (error: any) => {
+        console.log(error);
+      },
+    );
+  }
+
+  createImageFromBlob(image: Blob, filename: string) {
+    let reader = new FileReader();
+    reader.addEventListener(
+      'load',
+      () => {
+        this.images.set(filename, reader.result);
+      },
+      false,
+    );
+    if (image) {
+      reader.readAsDataURL(image);
     }
+  }
 
-    getUser(): void {
-        console.log(this.authService.getLoggedInUser());
-        
-        this.userService.getUser(this.authService.getLoggedInUser()).subscribe(
-            response => {
-                this.user = response;
-                console.log(this.user.ispublic);
-                
-                this.getImages();
-                if (response == null)
-                    this.router.navigate(['/login'])
-            }
-        );
-    }
+  getImage(filename: string): string {
+    if (filename && this.images.has(filename)) return this.images.get(filename);
+    return '';
+  }
 
-    getImages(): void {
-        if (this.user && this.user.headshot)
-            this.getImageFromService(this.user.headshot);
-        if (this.user && this.user.bodyshot)
-            this.getImageFromService(this.user.bodyshot);
-    }
-    
-    getImageFromService(filename: string) {
-        this.imageService.getImage(filename).subscribe((data: Blob) => {
-            this.createImageFromBlob(data, filename);
-        }, (error: any) => {
-            console.log(error);
-        });
-    }
+  logOut() {
+    this.authService.logOut();
+    this.router.navigate(['/login']);
+  }
 
-    createImageFromBlob(image: Blob, filename: string) {
-        let reader = new FileReader();
-        reader.addEventListener("load", () => {
-           this.images.set(filename, reader.result);
-        }, false);
-        if (image) {
-           reader.readAsDataURL(image);
-        }
+  keydown(event: any) {
+    let key = event.key;
+    let value = event.target.value;
+    if (key !== 'Backspace' && key !== 'Tab') {
+      if (!key.match(/^\d$/) || value.length >= 2) {
+        event.preventDefault();
+      }
     }
+  }
 
-    getImage(filename: string): string {
-        if (filename && this.images.has(filename))
-            return this.images.get(filename);
-        return "";
-    }
+  upload(form: any): void {
+    this.uploadHeadshot(form);
+  }
 
-    logOut() {
-        this.authService.logOut();
-        this.router.navigate(['/login'])
-    }
-
-    keydown(event: any) {
-        let key = event.key;
-        let value = event.target.value;
-        if (key !== 'Backspace' && key !== 'Tab') {
-            if (!key.match(/^\d$/) || value.length >= 2) {
-                event.preventDefault();
-            }
-        }
-    }
-
-    upload(form: any): void {
-        this.uploadHeadshot(form);
-    }
-
-    uploadHeadshot(form: any) {
-        if (this.headshot) {
-            const file: File | null = this.headshot.item(0);
-            if (file) {
-                this.imageService.upload(file).subscribe({
-                    next: (event: any) => {
-                        this.headshotName = event.filename;
-                        this.uploadBodyshot(form);
-                    },
-                    error: (err: any) => {
-                        alert("Error uploading head shot.");
-                    }
-                });
-            }
-        } else {
+  uploadHeadshot(form: any) {
+    if (this.headshot) {
+      const file: File | null = this.headshot.item(0);
+      if (file) {
+        this.imageService.upload(file).subscribe({
+          next: (event: any) => {
+            this.headshotName = event.filename;
             this.uploadBodyshot(form);
-        }
-    }
-
-    uploadBodyshot(form: any) {
-        if (this.bodyshot) {
-            const file: File | null = this.bodyshot.item(0);
-            if (file) {
-                this.imageService.upload(file).subscribe({
-                    next: (event: any) => {
-                        this.bodyshotName = event.filename;
-                        this.update(form);
-                    },
-                    error: (err: any) => {
-                        alert("Error uploading body shot.");
-                    }
-                });
-            }
-        } else {
-            this.update(form);
-        }
-    }
-    
-    selectHeadshot(event: any): void {
-        if(event.target.files[0].size > 10000000) {
-            console.log("no");
-            event.target.value = "";
-            alert("File cannot exceed 10MB.");
-        } else {
-            this.headshot = event.target.files;
-        }
-    }
-    
-    selectBodyshot(event: any): void {
-        if(event.target.files[0].size > 10000000) {
-            console.log("no");
-            event.target.value = "";
-            alert("File cannot exceed 10MB.");
-        } else {
-            this.bodyshot = event.target.files;
-        }
-    }
-
-    update(form: any): void {
-        let user: any = {
-            _id: this.user?._id,
-            email: form.email.trim(),
-            firstname: form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
-            lastname: form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
-            fullname: form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
-            ispublic: form.public,
-            gender: form.gender,
-            race: form.race,
-            height: form.height as number,
-            waist: form.waist,
-            hip: form.hip,
-            chest: form.chest,
-            eyes: form.eyes,
-            shoe: form.shoe,
-            hair: form.hair,
-            bio: form.bio.trim(),
-            instagram: form.instagram.trim(),
-            headshot: this.headshotName ? this.headshotName : this.user?.headshot,
-            bodyshot: this.bodyshotName ? this.bodyshotName : this.user?.bodyshot
-        };
-        if (form.password != "") {
-            console.log(form.password);
-            
-            let pw = bcrypt.hashSync(form.password, 10);
-            user.password = pw;
-        }
-        this.userService.updateUser(user as unknown as User).subscribe({
-            next: (event: any) => {
-                localStorage.setItem('api_auth_id', user.fullname);
-                this.userService.setLoggedInUser(user.fullname);
-                location.reload();
-            },
-            error: (err: any) => {
-                alert("There was an unexpected error.");
-            }
+          },
+          error: (err: any) => {
+            alert('Error uploading head shot.');
+          },
         });
+      }
+    } else {
+      this.uploadBodyshot(form);
     }
+  }
 
-    togglePublic(user: User, event: Event, form: any): void {
-        event.stopPropagation();
-        // this.update(form);
-        console.log(user.ispublic);
-        // user.ispublic = true;
-        // console.log(user.ispublic);
-        
-        // this.userService.updateUser(user).subscribe({
-        // });
+  uploadBodyshot(form: any) {
+    if (this.bodyshot) {
+      const file: File | null = this.bodyshot.item(0);
+      if (file) {
+        this.imageService.upload(file).subscribe({
+          next: (event: any) => {
+            this.bodyshotName = event.filename;
+            this.update(form);
+          },
+          error: (err: any) => {
+            alert('Error uploading body shot.');
+          },
+        });
+      }
+    } else {
+      this.update(form);
     }
+  }
+
+  selectHeadshot(event: any): void {
+    if (event.target.files[0].size > 10000000) {
+      console.log('no');
+      event.target.value = '';
+      alert('File cannot exceed 10MB.');
+    } else {
+      this.headshot = event.target.files;
+    }
+  }
+
+  selectBodyshot(event: any): void {
+    if (event.target.files[0].size > 10000000) {
+      console.log('no');
+      event.target.value = '';
+      alert('File cannot exceed 10MB.');
+    } else {
+      this.bodyshot = event.target.files;
+    }
+  }
+
+  update(form: any): void {
+    let user: any = {
+      _id: this.user?._id,
+      email: form.email.trim(),
+      firstname: form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
+      lastname: form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
+      username: form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
+      ispublic: form.public,
+      gender: form.gender,
+      race: form.race,
+      height: form.height as number,
+      waist: form.waist,
+      hip: form.hip,
+      chest: form.chest,
+      eyes: form.eyes,
+      shoe: form.shoe,
+      hair: form.hair,
+      bio: form.bio.trim(),
+      instagram: form.instagram.trim(),
+      headshot: this.headshotName ? this.headshotName : this.user?.headshot,
+      bodyshot: this.bodyshotName ? this.bodyshotName : this.user?.bodyshot,
+    };
+    if (form.password != '') {
+      console.log(form.password);
+
+      let pw = bcrypt.hashSync(form.password, 10);
+      user.password = pw;
+    }
+    this.userService.updateUser(user as unknown as User).subscribe({
+      next: (event: any) => {
+        localStorage.setItem('api_auth_username', user.username);
+        this.userService.setLoggedInUser(user.username);
+        location.reload();
+      },
+      error: (err: any) => {
+        alert('There was an unexpected error.');
+      },
+    });
+  }
+
+  togglePublic(user: User, event: Event, form: any): void {
+    event.stopPropagation();
+    // this.update(form);
+    console.log(user.ispublic);
+    // user.ispublic = true;
+    // console.log(user.ispublic);
+
+    // this.userService.updateUser(user).subscribe({
+    // });
+  }
 }

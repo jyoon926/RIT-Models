@@ -4,39 +4,43 @@ import { HttpClient } from '@angular/common/http';
 import { tap, Observable, catchError, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ImageService {
-    private imageUrl = environment.serverUrl + '/images/';
-    constructor(
-        private http: HttpClient
-    ) {}
+  private baseUrl = environment.serverUrl + '/images';
+  constructor(private http: HttpClient) {}
 
-    upload(file: File) {
-        const formData: FormData = new FormData();
-        formData.append('file', file);
-        return this.http.post<File>(`${this.imageUrl}uploadfile`, formData).pipe(tap((message) => 
-            {console.log(message);}, (error) => {console.log(error);
-            }
-        ));
-    }
+  upload(file: File) {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post<File>(`${this.baseUrl}/uploadfile`, formData).pipe(
+      tap(
+        (message) => {
+          console.log(message);
+        },
+        (error) => {
+          console.log(error);
+        },
+      ),
+    );
+  }
 
-    getImage(filename: string): Observable<Blob> {
-        const url = `${this.imageUrl}/${filename}`;
-        return this.http.get(url, { responseType: 'blob' });
-    }
+  getImage(filename: string): Observable<Blob> {
+    const url = `${this.baseUrl}/${filename}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
-    /**
-     * Handle Http operation that failed.
-     * Let the app continue.
-     *
-     * @param operation - name of the operation that failed
-     * @param result - optional value to return as the observable result
-     */
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            console.error(error);
-            return of(result as T);
-        };
-    }
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
+  }
 }

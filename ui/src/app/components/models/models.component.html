@@ -84,7 +84,7 @@
     </div>
     <div class="gallery">
         <ul>
-            <a *ngFor="let user of displayedUsers" routerLink="/models/{{user.firstname.toLowerCase() + user.lastname.toLowerCase()}}" [ngStyle]="{'background-image': ' url(' + getImage(user.headshot) + ')'}" [ngClass]="{'loading': getImage(user.headshot) == null}">
+            <a *ngFor="let user of displayedUsers" routerLink="/models/{{user.username}}" [ngStyle]="{'background-image': ' url(' + getImage(user.headshot) + ')'}" [ngClass]="{'loading': getImage(user.headshot) == null}">
                 <div class="col">
                     <p class="name"><em>{{user.firstname}} {{user.lastname}}</em></p>
                     <div class="in">
@@ -103,4 +103,4 @@
         </ul>
     </div>
     <h3 *ngIf="displayedUsers.length == 0">There are no models to view! Try changing your filters.</h3>
-</section>
+  </section>
