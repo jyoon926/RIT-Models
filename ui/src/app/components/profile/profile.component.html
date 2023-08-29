@@ -5,7 +5,7 @@
 
   <form autocomplete="off" #form="ngForm" (ngSubmit)="upload(form.value)" [noValidate]="false" *ngIf="user">
     <div class="buttons">
-      <button routerLink="/models/{{ user.username }}">View public profile</button>
+      <button routerLink="/models/{{ user.username }}">View profile</button>
       <button (click)="logOut()" class="logout">Log out</button>
     </div>
 
@@ -23,7 +23,7 @@
             [(ngModel)]="user.ispublic"
             style="margin-right: 6px"
             (change)="togglePublic(user, $event, form.value)" />
-          Public profile
+          Show profile on models page
         </label>
 
         <label for="firstname">

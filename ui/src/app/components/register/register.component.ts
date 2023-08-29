@@ -32,11 +32,11 @@ export class RegisterComponent {
     console.log(pw);
 
     let user = {
-      username: form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
+      username: form.email.trim().replace('@rit.edu', ''),
       email: form.email.trim(),
       password: pw,
-      firstname: form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
-      lastname: form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
+      firstname: form.firstname.trim(),
+      lastname: form.lastname.trim(),
       public: false,
       gender: form.gender,
       race: form.race,
@@ -52,6 +52,7 @@ export class RegisterComponent {
       headshot: this.headshotName ? this.headshotName : '',
       bodyshot: this.bodyshotName ? this.bodyshotName : '',
     };
+    console.log(user)
     this.userService.register(user as unknown as User).subscribe(() => {
       this.authService.logIn(user.email, form.password).subscribe(
         (res) => {

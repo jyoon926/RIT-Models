@@ -114,32 +114,10 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border: 1px solid $dark;
-      background: $dark;
+      background: rgba($dark, 1);
       color: $light;
-      &::before,
-      &::after {
-        width: calc(100% - 80px);
-        max-width: 300px;
-        padding: 12px 24px;
-        box-sizing: border-box;
-        content: "Register";
-        position: absolute;
-        color: rgba($dark, 0);
-        border: 1px solid rgba($dark, 1);
-        transition-duration: 0.4s;
-        z-index: -1;
-      }
       &:hover {
-        opacity: 1;
-        background: none;
-        color: $dark;
-        &::before {
-          transform: translate(4px, -4px);
-        }
-        &::after {
-          transform: translate(-4px, 4px);
-        }
+        background: rgba($dark, 0.8);
       }
     }
     a {

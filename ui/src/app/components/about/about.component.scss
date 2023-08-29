@@ -28,6 +28,14 @@ h3 {
   i {
     font-family: big-caslon-fb, serif;
   }
+  a {
+    font-family: big-caslon-fb, serif;
+    text-decoration: underline;
+    transition: .4s;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 }
 .right {
   margin-left: 50%;

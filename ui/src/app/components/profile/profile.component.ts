@@ -161,9 +161,9 @@ export class ProfileComponent implements OnInit {
     let user: any = {
       _id: this.user?._id,
       email: form.email.trim(),
-      firstname: form.firstname.trim().charAt(0).toUpperCase() + form.firstname.trim().slice(1).toLowerCase(),
-      lastname: form.lastname.trim().charAt(0).toUpperCase() + form.lastname.trim().slice(1).toLowerCase(),
-      username: form.firstname.trim().toLowerCase() + form.lastname.trim().toLowerCase(),
+      firstname: form.firstname.trim(),
+      lastname: form.lastname.trim(),
+      username: form.email.trim().replace('@rit.edu', ''),
       ispublic: form.public,
       gender: form.gender,
       race: form.race,
@@ -180,12 +180,10 @@ export class ProfileComponent implements OnInit {
       bodyshot: this.bodyshotName ? this.bodyshotName : this.user?.bodyshot,
     };
     if (form.password != '') {
-      console.log(form.password);
-
       let pw = bcrypt.hashSync(form.password, 10);
       user.password = pw;
     }
-    this.userService.updateUser(user as unknown as User).subscribe({
+    this.userService.updateUser(this.user!.username, user as unknown as User).subscribe({
       next: (event: any) => {
         localStorage.setItem('api_auth_username', user.username);
         this.userService.setLoggedInUser(user.username);

@@ -6,9 +6,9 @@ const bcrypt = require('bcrypt');
 
 // Inserting User CREATE
 router.post('/register', async (req, res, next) => {
-  const user = new User(req.body);
+  const newUser = new User(req.body);
   try {
-    const savedUser = await user.save();
+    const savedUser = await newUser.save();
     console.log("Registered " + savedUser.username);
     res.json(savedUser);
   } catch (error) {
@@ -71,6 +71,7 @@ router.post('/login', async (req, res, next) => {
 
 // Update User UPDATE
 router.put('/:username', (req, res, next) => {
+  console.log(req.params);
   User.updateOne({ username: req.params.username }, req.body).then((result) => {
     if (result.nModified === 0) {
       next(new Error(`Document could not be updated because username '${req.params.username}' does not exist!`));

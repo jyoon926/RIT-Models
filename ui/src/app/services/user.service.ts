@@ -35,9 +35,9 @@ export class UserService {
     return this.http.post(this.baseUrl + '/login', body, this.httpOptions);
   }
 
-  updateUser(user: User) {
-    return this.http.put(`${this.baseUrl}/${user.username}`, user, this.httpOptions).pipe(
-      tap((_) => console.log(`updated user '${user.username}'`)),
+  updateUser(username: string, user: User) {
+    return this.http.put(`${this.baseUrl}/${username}`, user, this.httpOptions).pipe(
+      tap((_) => console.log(`updated user '${username}'`)),
       catchError(this.handleError<any>('updateUser')),
     );
   }

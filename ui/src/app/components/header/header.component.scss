@@ -36,10 +36,9 @@ header {
     a {
       padding: 3px 1px;
       &:not(.sign-up):not(.profile) {
-        border-bottom: 1px solid rgba($dark, 0);
         transition-duration: 0.4s;
         &:hover {
-          border-bottom: 1px solid $dark;
+          opacity: 0.5;
         }
       }
     }

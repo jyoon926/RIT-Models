@@ -36,7 +36,7 @@ form {
     font-family: "big-caslon-fb", serif;
     margin-bottom: 40px;
     &:hover {
-      opacity: 0.6;
+      opacity: 0.75;
     }
   }
   .row {
@@ -141,36 +141,6 @@ form {
     width: 100%;
     max-width: 300px;
     text-align: center;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    // border: 1px solid $dark;
-    // background: $dark;
-    // color: $light;
-    // &::before, &::after {
-    //     width: calc(100% - 80px);
-    //     max-width: 300px;
-    //     padding: 12px 24px;
-    //     box-sizing: border-box;
-    //     content: "Register";
-    //     position: absolute;
-    //     color: rgba($dark, 0);
-    //     border: 1px solid rgba($dark, 1);
-    //     transition-duration: .4s;
-    //     z-index: -1;
-    // }
-    // &:hover {
-    //     opacity: 1;
-    //     background: none;
-    //     color: $dark;
-    //     &::before {
-    //         transform: translate(4px, -4px);
-    //     }
-    //     &::after {
-    //         transform: translate(-4px, 4px);
-    //     }
-    // }
   }
   a {
     text-decoration: underline;

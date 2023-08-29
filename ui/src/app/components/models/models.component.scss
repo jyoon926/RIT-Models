@@ -212,10 +212,6 @@ h1 {
         transition-duration: 0.4s;
         background: rgba(white, 0.65);
         backdrop-filter: blur(5px);
-        p,
-        em {
-          // color: $dark !important;
-        }
         .name {
           em {
             font-style: normal;
@@ -231,11 +227,12 @@ h1 {
           flex-direction: row;
           justify-content: space-between;
           align-items: flex-start;
-          padding: 5px 0;
+          padding: 4px 0;
           border-bottom: 1px solid rgba($dark, 0.2);
           gap: 20px;
           p {
             text-align: right;
+            font-size: 0.9em;
           }
         }
       }
