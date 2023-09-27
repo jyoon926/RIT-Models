@@ -146,6 +146,7 @@ export class ModelsComponent implements OnInit {
   }
 
   addUserToDisplayed(user: User) {
+    if (!user.ispublic) return;
     // Gender
     if (user.gender == 'Man' && !this.men) return;
     if (user.gender == 'Woman' && !this.women) return;
