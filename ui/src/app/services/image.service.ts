@@ -26,7 +26,7 @@ export class ImageService {
   }
 
   getImage(filename: string): Observable<Blob> {
-    const url = `${this.baseUrl}/${filename}`;
+    const url = `${this.baseUrl}/get/${filename}`;
     return this.http.get(url, { responseType: 'blob' });
   }
 

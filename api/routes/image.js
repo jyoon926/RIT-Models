@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const User = require('../models/User');
+const fs = require('fs');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -66,8 +68,21 @@ router.post('/uploadmultiple', (req, res) => {
   })
 });
 
-router.get('/:filename', async (req, res) => {
+router.get('/get/:filename', async (req, res) => {
   res.sendFile(`/uploads/${req.params.filename}`, { root: '.' });
 });
+
+router.get('/clean', (req, res) => {
+  fs.readdir('./uploads/', function (err, files) {
+    User.find({}, function (err, users) {
+      const images = users.map(u => u.headshot).concat(users.map(u => u.bodyshot));
+      const redundantFiles = files.filter(f => !images.includes(f));
+      redundantFiles.forEach(f => {
+        fs.unlinkSync('./uploads/' + f);
+      });
+      res.send(redundantFiles);
+    });
+  });
+})
 
 module.exports = router;
