@@ -89,7 +89,7 @@
                     <p class="name"><em>{{user.firstname}} {{user.lastname}}</em></p>
                     <div class="in">
                         <div class="inner" *ngIf="user.gender != 'N/A'"><p class="category">Gender</p><p>{{user.gender}}</p></div>
-                        <div class="inner" *ngIf="user.race != 'N/A'"><p class="category">Race</p><p>{{user.race}}</p></div>
+                        <div class="inner" *ngIf="user.race != ['N/A']"><p class="category">Race</p><p>{{user.race.join(", ")}}</p></div>
                         <div class="inner" *ngIf="user.height"><p class="category">Height</p><p>{{floor(user.height / 12)}}' {{user.height % 12}}"</p></div>
                         <div class="inner" *ngIf="user.waist"><p class="category">Waist</p><p>{{user.waist}}"</p></div>
                         <div class="inner" *ngIf="user.hip"><p class="category">Hip</p><p>{{user.hip}}"</p></div>

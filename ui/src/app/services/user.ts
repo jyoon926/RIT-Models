@@ -7,7 +7,7 @@ export interface User {
   isadmin: boolean;
   ispublic: boolean;
   gender: string;
-  race: string;
+  race: Array<string>;
   height: number;
   waist: number;
   hip: number;

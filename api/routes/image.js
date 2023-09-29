@@ -81,7 +81,7 @@ router.get('/clean', (req, res) => {
       }
       const redundantFiles = files.filter(f => !images.includes(f));
       redundantFiles.forEach(f => {
-        fs.unlinkSync('./uploads/' + f);
+        // fs.unlinkSync('./uploads/' + f);
       });
       res.send(redundantFiles);
     });

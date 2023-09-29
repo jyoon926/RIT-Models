@@ -23,9 +23,9 @@
           <p class="category">Gender</p>
           <p>{{ user.gender }}</p>
         </div>
-        <div class="inner" *ngIf="user.race != 'N/A'">
+        <div class="inner" *ngIf="!user.race.includes('N/A')">
           <p class="category">Race</p>
-          <p>{{ user.race }}</p>
+          <p>{{ user.race.join(", ") }}</p>
         </div>
         <div class="inner" *ngIf="user.height">
           <p class="category">Height</p>
