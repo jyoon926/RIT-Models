@@ -40,55 +40,16 @@ export class ModelsComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers().subscribe((users) => {
+    this.userService.getUsers().subscribe(async users => {
+      users.sort((a, b) => a.firstname.localeCompare(b.firstname) || a.lastname.localeCompare(b.lastname));
       this.users = users;
-      this.users = this.users.sort((a, b) => {
-        if (a.firstname < b.firstname) {
-          return -1;
-        } else if (a.firstname > b.firstname) {
-          return 1;
-        }
-        return 0;
-      });
       this.displayedUsers = this.users.filter((value) => value.ispublic);
-      this.getImages();
+      this.images = await this.imageService.getThumbnails(this.users);
     });
   }
 
-  getImages(): void {
-    this.users.forEach((user) => {
-      if (user.headshot) this.getImageFromService(user.headshot);
-    });
-  }
-
-  getImageFromService(filename: string) {
-    this.imageService.getImage(filename).subscribe(
-      (data) => {
-        this.createImageFromBlob(data, filename);
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
-  }
-
-  createImageFromBlob(image: Blob, filename: string) {
-    let reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => {
-        this.images.set(filename, reader.result);
-      },
-      false,
-    );
-    if (image) {
-      reader.readAsDataURL(image);
-    }
-  }
-
-  getImage(filename: string): string {
+  getImage(filename: string) {
     if (filename && this.images.has(filename)) return this.images.get(filename);
-    return '';
   }
 
   array(n: number) {

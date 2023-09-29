@@ -7,7 +7,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  
   constructor(public authService: AuthService) {}
+
   hideMenu() {
     let checkbox = document.getElementById('checkbox') as HTMLInputElement;
     if (checkbox.checked) {

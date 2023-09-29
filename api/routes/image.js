@@ -75,7 +75,10 @@ router.get('/get/:filename', async (req, res) => {
 router.get('/clean', (req, res) => {
   fs.readdir('./uploads/', function (err, files) {
     User.find({}, function (err, users) {
-      const images = users.map(u => u.headshot).concat(users.map(u => u.bodyshot));
+      let images = [];
+      for (let user of users) {
+        images = images.concat(user.photos);
+      }
       const redundantFiles = files.filter(f => !images.includes(f));
       redundantFiles.forEach(f => {
         fs.unlinkSync('./uploads/' + f);

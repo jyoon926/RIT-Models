@@ -17,6 +17,5 @@ export interface User {
   hair: string;
   bio: string;
   instagram: string;
-  headshot: string;
-  bodyshot: string;
+  photos: Array<string>;
 }

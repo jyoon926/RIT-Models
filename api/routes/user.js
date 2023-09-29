@@ -40,6 +40,29 @@ router.get('/:username', async (req, res) => {
   });
 });
 
+// Update User UPDATE
+router.put('/:username', (req, res, next) => {
+  console.log(req.params);
+  User.updateOne({ username: req.params.username }, req.body).then((result) => {
+    if (result.nModified === 0) {
+      next(new Error(`Document could not be updated because username '${req.params.username}' does not exist!`));
+    } else {
+      res.json(result);
+    }
+  }).catch(error => next(error));
+});
+
+// Delete User DELETE
+router.delete('/:username', (req, res, next) => {
+  User.deleteOne({ username: req.params.username }).then((result) => {
+    if (result.deletedCount === 0) {
+      next(new Error(`Document could not be delete because username '${req.params.username}' does not exist!`));
+    } else {
+      res.sendStatus(200);
+    }
+  }).catch(error => next(error));
+});
+
 // Check if email exists
 router.get('/exists/:email', async (req, res) => {
   User.findOne({ email: req.params.email }).then((result) => {
@@ -67,29 +90,6 @@ router.post('/login', async (req, res, next) => {
         res.sendStatus(401);
       }
     }).catch(error => next(error));
-});
-
-// Update User UPDATE
-router.put('/:username', (req, res, next) => {
-  console.log(req.params);
-  User.updateOne({ username: req.params.username }, req.body).then((result) => {
-    if (result.nModified === 0) {
-      next(new Error(`Document could not be updated because username '${req.params.username}' does not exist!`));
-    } else {
-      res.json(result);
-    }
-  }).catch(error => next(error));
-});
-
-// Delete User DELETE
-router.delete('/:username', (req, res, next) => {
-  User.deleteOne({ username: req.params.username }).then((result) => {
-    if (result.deletedCount === 0) {
-      next(new Error(`Document could not be delete because username '${req.params.username}' does not exist!`));
-    } else {
-      res.sendStatus(200);
-    }
-  }).catch(error => next(error));
 });
 
 module.exports = router;

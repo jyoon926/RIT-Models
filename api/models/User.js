@@ -78,11 +78,8 @@ const UserSchema = new Scheme(
     instagram: {
       type: String
     },
-    headshot: {
-      type: String
-    },
-    bodyshot: {
-      type: String
+    photos: {
+      type: Array
     }
   },
   {

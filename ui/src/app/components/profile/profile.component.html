@@ -175,30 +175,21 @@
           <span class="at">@</span>
           <input id="instagram" type="text" name="instagram" [(ngModel)]="user.instagram" style="width: 150px" />
         </div>
-        <label for="headshot">
-          Headshot
-          <span>*</span>
-        </label>
-        <img src="{{ getImage(user.headshot) }}" alt="" />
-        <input
-          id="headshot"
-          type="file"
-          name="headshot"
-          ngModel
-          style="width: 250px"
-          (change)="selectHeadshot($event)" />
-        <label for="bodyshot">
-          Body Shot
-          <span>*</span>
-        </label>
-        <img src="{{ getImage(user.bodyshot) }}" alt="" />
-        <input
-          id="bodyshot"
-          type="file"
-          name="bodyshot"
-          ngModel
-          style="width: 250px"
-          (change)="selectBodyshot($event)" />
+        <label>Photos<span>*</span></label>
+        <div class="photos-container">
+          <div class="photos-list">
+            <div class="photo" *ngFor="let photo of photos; let i = index" [ngStyle]="{'background-image': ' url(' + getImage(photo) + ')'}">
+              <a class="delete" (click)="deletePhoto($event, photo)"><fa-icon [icon]="faTrash"></fa-icon></a>
+              <div class="move">
+                <a class="left" (click)="movePhoto($event, i, i - 1)"><fa-icon [icon]="faArrowLeft"></fa-icon></a>
+                <a class="right" (click)="movePhoto($event, i, i + 1)"><fa-icon [icon]="faArrowRight"></fa-icon></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input id="upload" type="file" name="upload" style="width: 250px" (change)="selectUpload($event)" multiple>
+        <a class="upload" (click)="uploadPhoto(form.value)">Upload new photo(s)</a>
+        <button id="save" type="submit">Save changes</button>
       </div>
     </div>
   </form>

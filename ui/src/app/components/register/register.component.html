@@ -133,28 +133,17 @@
           <input id="instagram" type="text" name="instagram" ngModel style="width: 150px" />
         </div>
         <div class="small">
-          <label for="headshot">Headshot<span>*</span></label>
+          <label for="photos">Photos<span>*</span></label>
           <input
-            id="headshot"
+            id="photos"
             type="file"
-            name="headshot"
+            name="photos"
             accept="image/png, image/jpeg, image/jpg"
             required
             ngModel
             style="width: 250px"
-            (change)="selectHeadshot($event)" />
-        </div>
-        <div class="small">
-          <label for="bodyshot">Body Shot<span>*</span></label>
-          <input
-            id="bodyshot"
-            type="file"
-            name="bodyshot"
-            accept="image/png, image/jpeg, image/jpg"
-            required
-            ngModel
-            style="width: 250px"
-            (change)="selectBodyshot($event)" />
+            (change)="selectPhotos($event)"
+            multiple />
         </div>
 
         <p style="opacity: 0.6">

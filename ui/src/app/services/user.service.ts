@@ -68,7 +68,6 @@ export class UserService {
   getUser(username: string): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/${username}`).pipe(
       tap(),
-      // _ => console.log(`fetched user ${name}`)
       catchError(this.handleError<User>(`getUser ${username}`)),
     );
   }

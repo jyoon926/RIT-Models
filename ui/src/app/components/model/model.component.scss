@@ -4,7 +4,7 @@ section {
   padding: 200px 40px;
 }
 h1 {
-  font-size: max(6rem, 8vw);
+  font-size: max(4rem, 6vw);
   font-family: big-caslon-fb, serif;
   margin-bottom: 40px;
   border-bottom: 1px solid rgba($dark, 0.3);
@@ -40,11 +40,11 @@ h1 {
       width: 100%;
       display: flex;
       flex-direction: row;
-      justify-content: flex-end;
-      gap: 20px;
+      justify-content: flex-start;
+      gap: 8px;
       flex-wrap: wrap;
       .thumbnail {
-        width: 140px;
+        width: 120px;
         aspect-ratio: 0.75;
         background-size: cover;
         background-repeat: no-repeat;
@@ -79,6 +79,10 @@ h1 {
         border-bottom: none;
       }
     }
+    .bio {
+      max-width: 400px;
+      line-height: 1.25;
+    }
     .links {
       display: flex;
       flex-direction: row;
@@ -108,7 +112,7 @@ h1 {
     padding: 200px 20px;
   }
   h1 {
-    font-size: 6rem;
+    font-size: 4rem;
   }
   .row {
     flex-direction: column;

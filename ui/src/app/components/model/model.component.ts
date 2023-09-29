@@ -29,42 +29,11 @@ export class ModelComponent implements OnInit {
 
   getUser(): void {
     const username = this.route.snapshot.paramMap.get('username');
-
     if (username != null) {
-      this.userService.getUser(username).subscribe((user) => {
+      this.userService.getUser(username).subscribe(async user => {
         this.user = user;
-        this.getImages();
+        this.images = await this.imageService.getPhotos(this.user);
       });
-    }
-  }
-
-  getImages(): void {
-    if (this.user && this.user.headshot) this.getImageFromService(this.user.headshot);
-    if (this.user && this.user.bodyshot) this.getImageFromService(this.user.bodyshot);
-  }
-
-  getImageFromService(filename: string) {
-    this.imageService.getImage(filename).subscribe(
-      (data: Blob) => {
-        this.createImageFromBlob(data, filename);
-      },
-      (error: any) => {
-        console.log(error);
-      },
-    );
-  }
-
-  createImageFromBlob(image: Blob, filename: string) {
-    let reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => {
-        this.images.set(filename, reader.result);
-      },
-      false,
-    );
-    if (image) {
-      reader.readAsDataURL(image);
     }
   }
 

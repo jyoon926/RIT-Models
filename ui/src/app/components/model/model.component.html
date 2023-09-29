@@ -5,17 +5,17 @@
       class="image"
       id="image"
       [ngStyle]="{
-        'background-image': ' url(' + getImage(user.headshot) + ')'
+        'background-image': ' url(' + getImage(user.photos[0]) + ')'
       }"></div>
     <div class="col">
       <div class="track">
         <a
           class="thumbnail"
-          *ngFor="let image of images | keyvalue"
+          *ngFor="let photo of user.photos"
           [ngStyle]="{
-            'background-image': ' url(' + getImage(image.key) + ')'
+            'background-image': ' url(' + getImage(photo) + ')'
           }"
-          (click)="selectImage(image.key)"></a>
+          (click)="selectImage(photo)"></a>
       </div>
       <div class="info">
         <!-- <p class="name"><em>{{user.firstname}}</em></p> -->
@@ -59,7 +59,7 @@
       <p class="bio" *ngIf="user.bio.length > 0">{{ user.bio }}</p>
       <div class="links">
         <a href="mailto:{{ user.email }}">Email</a>
-        <a *ngIf="user.instagram" href="https://www.instagram.com/{{ user.instagram }}/" target="_blank"> Instagram </a>
+        <a *ngIf="user.instagram" href="https://www.instagram.com/{{ user.instagram }}/" target="_blank">Instagram</a>
         <button routerLink="/profile" *ngIf="authService.getLoggedInUser() == user.username">Edit profile</button>
       </div>
       <button (click)="back()" class="back">Back</button>

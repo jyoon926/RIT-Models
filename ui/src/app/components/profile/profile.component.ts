@@ -2,24 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/services/user';
 import { UserService } from 'src/app/services/user.service';
-import { Location } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
 import * as bcrypt from 'bcryptjs';
-import { STRING_TYPE } from '@angular/compiler';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  headshot?: FileList;
-  bodyshot?: FileList;
-  headshotName?: string;
-  bodyshotName?: string;
+  uploadFiles?: FileList;
   user: User | undefined;
   images = new Map<string, any>();
+  photos: string[] = [];
+  faTrash = faTrash;
+  faArrowLeft = faArrowLeft;
+  faArrowRight = faArrowRight;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,46 +36,34 @@ export class ProfileComponent implements OnInit {
     this.getUser();
   }
 
-  getUser(): void {
-    console.log(this.authService.getLoggedInUser());
-
-    this.userService.getUser(this.authService.getLoggedInUser()).subscribe((response) => {
-      this.user = response;
-      console.log(this.user.ispublic);
-
-      this.getImages();
-      if (response == null) this.router.navigate(['/login']);
-    });
-  }
-
-  getImages(): void {
-    if (this.user && this.user.headshot) this.getImageFromService(this.user.headshot);
-    if (this.user && this.user.bodyshot) this.getImageFromService(this.user.bodyshot);
-  }
-
-  getImageFromService(filename: string) {
-    this.imageService.getImage(filename).subscribe(
-      (data: Blob) => {
-        this.createImageFromBlob(data, filename);
-      },
-      (error: any) => {
-        console.log(error);
-      },
-    );
-  }
-
-  createImageFromBlob(image: Blob, filename: string) {
-    let reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => {
-        this.images.set(filename, reader.result);
-      },
-      false,
-    );
-    if (image) {
-      reader.readAsDataURL(image);
+  deletePhoto(event: Event, photo: string): void {
+    event.stopPropagation();
+    if (this.photos.length == 1) {
+      alert("You need at least one photo on your profile.");
+    } else {
+      this.photos = this.photos.filter(p => p !== photo);
     }
+  }
+
+  movePhoto(event: Event, from: number, to: number): void {
+    event.stopPropagation();
+    if (to >= 0 && to < this.photos.length) {
+      let temp = this.photos[to];
+      this.photos[to] = this.photos[from];
+      this.photos[from] = temp;
+    }
+  }
+
+  getUser(): void {
+    if (!this.authService.getLoggedInUser()) {
+      this.router.navigate(['/login'])
+    }
+    this.userService.getUser(this.authService.getLoggedInUser()).subscribe(async user => {
+      if (user == null) this.router.navigate(['/login']);
+      this.user = user;
+      this.photos = user.photos;
+      this.images = await this.imageService.getPhotos(user);
+    });
   }
 
   getImage(filename: string): string {
@@ -95,65 +86,40 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  upload(form: any): void {
-    this.uploadHeadshot(form);
+  async upload(form: any): Promise<void> {
+    await this.uploadPhoto(form);
   }
 
-  uploadHeadshot(form: any) {
-    if (this.headshot) {
-      const file: File | null = this.headshot.item(0);
-      if (file) {
-        this.imageService.upload(file).subscribe({
-          next: (event: any) => {
-            this.headshotName = event.filename;
-            this.uploadBodyshot(form);
-          },
-          error: (err: any) => {
-            alert('Error uploading head shot.');
-          },
-        });
+  async uploadPhoto(form: any) {
+    if (this.uploadFiles) {
+      for (let i = 0; i < this.uploadFiles.length; ++i) {
+        const file: File | null = this.uploadFiles.item(i);
+        if (file) {
+          try {
+            const event: any = await lastValueFrom(this.imageService.upload(file));
+            console.log(event.filename);
+            this.photos.push(event.filename);
+          } catch (e: any) {
+            alert(e.error);
+          }
+        }
       }
-    } else {
-      this.uploadBodyshot(form);
     }
+    this.update(form);
   }
 
-  uploadBodyshot(form: any) {
-    if (this.bodyshot) {
-      const file: File | null = this.bodyshot.item(0);
-      if (file) {
-        this.imageService.upload(file).subscribe({
-          next: (event: any) => {
-            this.bodyshotName = event.filename;
-            this.update(form);
-          },
-          error: (err: any) => {
-            alert('Error uploading body shot.');
-          },
-        });
+  selectUpload(event: any): void {
+    let large = false;
+    for (let i = 0; i < event.target.files.length && !large; ++i) {
+      if (event.target.files.item(i).size > 10000000) {
+        large = true;
       }
-    } else {
-      this.update(form);
     }
-  }
-
-  selectHeadshot(event: any): void {
-    if (event.target.files[0].size > 10000000) {
-      console.log('no');
+    if (large) {
       event.target.value = '';
-      alert('File cannot exceed 10MB.');
+      alert('Individual files cannot exceed 10MB.');
     } else {
-      this.headshot = event.target.files;
-    }
-  }
-
-  selectBodyshot(event: any): void {
-    if (event.target.files[0].size > 10000000) {
-      console.log('no');
-      event.target.value = '';
-      alert('File cannot exceed 10MB.');
-    } else {
-      this.bodyshot = event.target.files;
+      this.uploadFiles = event.target.files;
     }
   }
 
@@ -176,8 +142,7 @@ export class ProfileComponent implements OnInit {
       hair: form.hair,
       bio: form.bio.trim(),
       instagram: form.instagram.trim(),
-      headshot: this.headshotName ? this.headshotName : this.user?.headshot,
-      bodyshot: this.bodyshotName ? this.bodyshotName : this.user?.bodyshot,
+      photos: this.photos
     };
     if (form.password != '') {
       let pw = bcrypt.hashSync(form.password, 10);
@@ -197,12 +162,6 @@ export class ProfileComponent implements OnInit {
 
   togglePublic(user: User, event: Event, form: any): void {
     event.stopPropagation();
-    // this.update(form);
     console.log(user.ispublic);
-    // user.ispublic = true;
-    // console.log(user.ispublic);
-
-    // this.userService.updateUser(user).subscribe({
-    // });
   }
 }
