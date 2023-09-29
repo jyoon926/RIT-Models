@@ -156,13 +156,7 @@ form {
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-end;
-        &:hover {
-          a {
-            opacity: 1;
-          }
-        }
         a {
-          opacity: 0;
           cursor: pointer;
           background: white;
           border-radius: 100vw;
