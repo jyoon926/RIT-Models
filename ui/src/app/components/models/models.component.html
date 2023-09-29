@@ -1,8 +1,8 @@
 <section>
     <h1>Models</h1>
-    <input type="checkbox" id="filter-checkbox">
-    <label for="filter-checkbox" id="filter-button">Filters<p></p></label>
-    <div id="filters">
+    <input type="checkbox" id="filter-checkbox" [(ngModel)]="showFilters">
+    <label for="filter-checkbox" id="filter-button" (click)="showFilters = !showFilters">Filters<p></p></label>
+    <div id="filters" #filtersBox>
         <p>Gender</p>
         <div class="row">
             <label for="men">men<input type="checkbox" id="men" (change)="changeFilters()" [(ngModel)]="men"></label>

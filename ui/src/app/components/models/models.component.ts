@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/services/user';
 
 import { UserService } from 'src/app/services/user.service';
@@ -13,6 +13,8 @@ export class ModelsComponent implements OnInit {
   users: User[] = [];
   images = new Map<string, any>();
   displayedUsers: User[] = [];
+  @ViewChild('filtersBox', { static:false, read: ElementRef }) filtersBox: any;
+  showFilters: boolean = false;
 
   // Filters
   men = true;
@@ -190,5 +192,12 @@ export class ModelsComponent implements OnInit {
     this.users.forEach((user) => {
       this.addUserToDisplayed(user);
     });
+  }
+
+  @HostListener('document:click', ['$event'])
+  documentClick(event: any): void {
+    if (!this.filtersBox.nativeElement.contains(event.target)) {
+      this.showFilters = false;
+    }
   }
 }

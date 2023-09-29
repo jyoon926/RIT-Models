@@ -195,11 +195,6 @@ h1 {
       @media screen and (max-width: 600px) {
         width: calc(100%);
       }
-      img {
-        // position: absolute;
-        z-index: -1;
-        width: 100%;
-      }
       .col {
         width: 100%;
         aspect-ratio: 0.75;
