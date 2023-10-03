@@ -9,6 +9,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { lastValueFrom } from 'rxjs';
+import Compressor from 'compressorjs';
 
 @Component({
   selector: 'app-profile',
@@ -96,8 +97,9 @@ export class ProfileComponent implements OnInit {
         const file: File | null = this.uploadFiles.item(i);
         if (file) {
           try {
-            const event: any = await lastValueFrom(this.imageService.upload(file));
-            console.log(event.filename);
+            const compressedFile = new File([await this.compress(file) as Blob], file.name, { type: file.type });
+            console.log(compressedFile);
+            const event: any = await lastValueFrom(this.imageService.upload(compressedFile));
             this.photos.push(event.filename);
           } catch (e: any) {
             alert(e.error);
@@ -163,5 +165,16 @@ export class ProfileComponent implements OnInit {
   togglePublic(user: User, event: Event, form: any): void {
     event.stopPropagation();
     console.log(user.ispublic);
+  }
+
+  compress(file: File) {
+    return new Promise((resolve, reject) => {
+      new Compressor(file, {
+        quality: 0.6,
+        maxWidth: 1024,
+        success: resolve,
+        error: reject
+      });
+    });
   }
 }

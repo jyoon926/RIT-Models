@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
 import * as bcrypt from 'bcryptjs';
 import { lastValueFrom } from 'rxjs';
+import Compressor from 'compressorjs';
 
 @Component({
   selector: 'app-register',
@@ -83,7 +84,9 @@ export class RegisterComponent {
         const file: File | null = this.photos.item(i);
         if (file) {
           try {
-            const event: any = await lastValueFrom(this.imageService.upload(file));
+            const compressedFile = new File([await this.compress(file) as Blob], file.name);
+            console.log(compressedFile);
+            const event: any = await lastValueFrom(this.imageService.upload(compressedFile));
             this.photoNames.push(event.filename);
           } catch (e: any) {
             alert(e.error);
@@ -107,5 +110,16 @@ export class RegisterComponent {
     } else {
       this.photos = event.target.files;
     }
+  }
+
+  compress(file: File) {
+    return new Promise((resolve, reject) => {
+      new Compressor(file, {
+        quality: 0.6,
+        maxWidth: 1024,
+        success: resolve,
+        error: reject
+      });
+    });
   }
 }

@@ -24,6 +24,7 @@
     "@types/bcryptjs": "^2.4.4",
     "@types/email-validator": "^1.0.30",
     "bcryptjs": "^2.4.3",
+    "compressorjs": "^1.2.1",
     "email-validator": "^2.0.4",
     "rxjs": "~7.8.1",
     "smooth-scrollbar": "^8.8.4",

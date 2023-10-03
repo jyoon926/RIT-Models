@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const sharp = require('sharp');
 const User = require('../models/User');
 const fs = require('fs');
 
@@ -87,5 +88,16 @@ router.get('/clean', (req, res) => {
     });
   });
 })
+
+// router.get('/compress', (req, res) => {
+//   fs.readdir('./originals/', function (err, files) {
+//     files.forEach(filename => {
+//       fs.readFile(`./originals/${filename}`, async (err, data) => {
+//         await sharp(data).resize(1024).jpeg({quality: 60}).toFile("./uploads/" + filename);
+//       })
+//     });
+//   });
+//   res.send(true);
+// });
 
 module.exports = router;
