@@ -176,14 +176,17 @@ h1 {
     width: 100%;
     a {
       list-style: none;
-      width: calc((100% - 80px) / 5);
+      width: calc((100% - 100px) / 6);
       background: rgba($dark, 0.1);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       mix-blend-mode: multiply;
       transition-duration: 0.4s;
-      @media screen and (max-width: 1600px) {
+      @media screen and (max-width: 1800px) {
+        width: calc((100% - 80px) / 5);
+      }
+      @media screen and (max-width: 1500px) {
         width: calc((100% - 60px) / 4);
       }
       @media screen and (max-width: 1200px) {

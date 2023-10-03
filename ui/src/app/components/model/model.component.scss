@@ -51,6 +51,7 @@ h1 {
         background-position: center;
         mix-blend-mode: multiply;
         transition-duration: 0.3s;
+        background-color: rgba($dark, 0.1);
         &:hover {
           cursor: pointer;
           opacity: 0.5;
