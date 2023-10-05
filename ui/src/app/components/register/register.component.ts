@@ -37,7 +37,7 @@ export class RegisterComponent {
       password: pw,
       firstname: form.firstname.trim(),
       lastname: form.lastname.trim(),
-      public: false,
+      public: true,
       gender: form.gender,
       race: form.race,
       height: form.height as number,
